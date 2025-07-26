@@ -1,6 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback, startTransition } from 'react';
 import { AppBar, BaseInput, ChatBubble, ChatCard, ThinkingCard, ChatEventCard } from '../components';
 import type { ThinkingStep } from '../components/ThinkingCard';
+import { collect } from '../workflows/agents/collector';
+import { websearch } from '../workflows/agents/websearch';
+import { schedule } from '../workflows/agents/scheduler';
+import { openrouter, siliconflow } from '../workflows/provider';
 import './ChatPage.css';
 
 // 定义内容项类型
@@ -41,119 +45,75 @@ const ChatPage: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [currentReplyIndex, setCurrentReplyIndex] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [currentStage, setCurrentStage] = useState<'idle' | 'collecting' | 'searching' | 'scheduling'>('idle');
+  const [pendingQuestions, setPendingQuestions] = useState<string[]>([]);
+  const [waitingForAnswers, setWaitingForAnswers] = useState(false);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [collectedAnswers, setCollectedAnswers] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const answerResolverRef = useRef<((answers: string[]) => void) | null>(null);
 
-  // 预定义的AI回复列表（混合文本和卡片内容）
-  const aiReplies = [
-    [
-      {
-        type: 'text' as const,
-        data: { text: "好的，我来帮你制定香港聚会的规划。首先需要了解一些基本信息，比如聚会的时间、地点和参与人数。" }
-      }
-    ],
-    [
-      {
-        type: 'text' as const,
-        data: { text: "根据你的情况，我为你准备了一份详细的规划建议：" }
-      },
-      {
-        type: 'card' as const,
-        data: {
-          cardData: {
-            title: "香港聚会规划建议",
-            icon: "plan"
-          }
+  // 模型配置
+  const modelV3 = siliconflow('deepseek-ai/DeepSeek-V3');
+  const modelFlash = openrouter('google/gemini-2.5-flash');
+  const modelK2 = siliconflow('moonshotai/Kimi-K2-Instruct');
+
+  // 添加消息的辅助函数
+  const addMessage = useCallback((type: 'user' | 'ai', content: ContentItem[]) => {
+    const message: Message = {
+      id: `${type}-${Date.now()}`,
+      type,
+      timestamp: generateTimestamp(),
+      content
+    };
+    setMessages(prev => [...prev, message]);
+    return message;
+  }, []);
+
+  // 添加思考状态消息
+  const addThinkingMessage = useCallback((mainStep: string, statusText: string) => {
+    return addMessage('ai', [{
+      type: 'thinking',
+      data: {
+        thinkingData: {
+          status: 'thinking',
+          statusText,
+          mainStep,
+          steps: []
         }
       }
-    ],
-    [
-      {
-        type: 'text' as const,
-        data: { text: "我为你安排了一个具体的聚会计划，请查看以下详情：" }
-      },
-      {
-        type: 'event' as const,
-        data: {
-          eventData: {
-            title: "在香港参加聚会",
-            time: "5月10日 21:00 - 次日 01:00",
-            location: "香港帕蒂奈 KTV",
-            statusMessage: "经过检查，规划安排没有冲突",
-            locationIcon: "placeFlag"
-          }
-        }
+    }]);
+  }, [addMessage]);
+
+  // 更新思考状态
+  const updateThinkingMessage = useCallback((messageId: string, statusText: string, steps?: ThinkingStep[]) => {
+    setMessages(prev => prev.map(msg => {
+      if (msg.id === messageId) {
+        return {
+          ...msg,
+          content: msg.content.map(item => {
+            if (item.type === 'thinking') {
+              return {
+                ...item,
+                data: {
+                  ...item.data,
+                  thinkingData: {
+                    ...item.data.thinkingData!,
+                    statusText,
+                    steps: steps || item.data.thinkingData!.steps
+                  }
+                }
+              };
+            }
+            return item;
+          })
+        };
       }
-    ],
-    [
-      {
-        type: 'thinking' as const,
-        data: {
-          thinkingData: {
-            status: 'thinking' as const,
-            statusText: '研究中',
-            mainStep: '智能思考',
-            steps: [
-              {
-                id: 'context',
-                title: '获取上下文',
-                description: '正在分析你的聚会需求和偏好，结合香港当地的实际情况...',
-                isLoading: true,
-                tags: [
-                  { id: 'plan1', title: '用户最近的规划', icon: 'plan' },
-                  { id: 'note1', title: '相关笔记', icon: 'note' },
-                  { id: 'traffic1', title: '交通状况', icon: 'traffic' }
-                ]
-              }
-            ]
-          }
-        }
-      }
-    ],
-    [
-      {
-        type: 'text' as const,
-        data: { text: "我建议几个方案：如果喜欢热闹，可以选择铜锣湾或尖沙咀的餐厅；如果想要安静一些，可以考虑太平山顶的景观餐厅。" }
-      },
-      {
-        type: 'card' as const,
-        data: {
-          cardData: {
-            title: "推荐餐厅列表",
-            icon: "placeFlag"
-          }
-        }
-      }
-    ],
-    [
-      {
-        type: 'text' as const,
-        data: { text: "关于交通安排，建议提前预订出租车或使用港铁。港铁很方便，而且避免了交通拥堵的问题。" }
-      },
-      {
-        type: 'card' as const,
-        data: {
-          cardData: {
-            title: "交通路线规划",
-            icon: "traffic"
-          }
-        }
-      }
-    ],
-    [
-      {
-        type: 'text' as const,
-        data: { text: "还需要考虑一下住宿安排吗？香港的酒店选择很多，我可以根据你的预算推荐一些不错的选择。" }
-      }
-    ],
-    [
-      {
-        type: 'text' as const,
-        data: { text: "聚会的时候记得准备一些小礼物或者纪念品，这样能让聚会更有意义。有什么其他需要我帮助规划的吗？" }
-      }
-    ]
-  ];
+      return msg;
+    }));
+  }, []);
 
   // 生成时间戳
   const generateTimestamp = () => {
@@ -204,40 +164,234 @@ const ChatPage: React.FC = () => {
     setInputValue(value);
   };
 
-  const handleSubmit = () => {
-    if (!inputValue.trim()) return;
+  // 处理问题回答
+  const handleQuestionAnswer = useCallback((answer: string) => {
+    // 立即清空输入框，避免UI卡顿
+    setInputValue('');
+    
+    startTransition(() => {
+      // 添加用户回答的消息
+      addMessage('user', [{
+        type: 'text',
+        data: { text: answer }
+      }]);
 
-    const userMessage = {
-      id: `user-${Date.now()}`,
-      type: 'user' as const,
-      timestamp: generateTimestamp(),
-      content: [
-        {
-          type: 'text' as const,
-          data: { text: inputValue }
+      const newAnswers = [...collectedAnswers, answer];
+      setCollectedAnswers(newAnswers);
+      
+      // 检查是否还有更多问题
+      const nextIndex = currentQuestionIndex + 1;
+      if (nextIndex < pendingQuestions.length) {
+        // 还有更多问题，显示下一个
+        setCurrentQuestionIndex(nextIndex);
+        setTimeout(() => {
+          addMessage('ai', [{
+            type: 'text',
+            data: { text: `问题 ${nextIndex + 1}/${pendingQuestions.length}: ${pendingQuestions[nextIndex]}` }
+          }]);
+        }, 100);
+      } else {
+        // 所有问题都回答完毕，提交答案
+        if (answerResolverRef.current) {
+          const resolver = answerResolverRef.current;
+          answerResolverRef.current = null;
+          
+          setWaitingForAnswers(false);
+          setPendingQuestions([]);
+          setCurrentQuestionIndex(0);
+          setCollectedAnswers([]);
+          
+          addMessage('ai', [{
+            type: 'text',
+            data: { text: '感谢您的回答！正在处理您的信息...' }
+          }]);
+          
+          // 延迟调用resolver，避免竞态条件
+          setTimeout(() => {
+            resolver(newAnswers);
+          }, 200);
         }
-      ]
-    };
+      }
+    });
+  }, [collectedAnswers, currentQuestionIndex, pendingQuestions, addMessage]);
+
+  const handleSubmit = useCallback(async () => {
+    console.log(isProcessing)
+    // if (!inputValue.trim() || isProcessing) return;
+
+    console.log(waitingForAnswers)
+    console.log(pendingQuestions)
+
+    // 如果正在等待用户回答问题，处理回答
+    if (waitingForAnswers && pendingQuestions.length > 0) {
+      console.log('answer')
+      handleQuestionAnswer(inputValue);
+      return;
+    }
 
     // 添加用户消息
-    setMessages(prev => [...prev, userMessage]);
+    addMessage('user', [{
+      type: 'text',
+      data: { text: inputValue }
+    }]);
+
+    const query = inputValue;
     setInputValue('');
+    setIsProcessing(true);
 
-    // 模拟AI回复延迟
-    setTimeout(() => {
-      const currentReply = aiReplies[currentReplyIndex % aiReplies.length];
+    try {
+      await runWorkflow(query);
+    } catch (error) {
+      console.error('工作流程执行失败:', error);
+      addMessage('ai', [{
+        type: 'text',
+        data: { text: '抱歉，处理您的请求时出现了错误，请稍后再试。' }
+      }]);
+    } finally {
+      setIsProcessing(false);
+    }
+  }, [inputValue, isProcessing, waitingForAnswers, pendingQuestions, handleQuestionAnswer, addMessage]);
+
+  // 格式化时间线时间
+  const formatTimelineTime = useCallback((when: string) => {
+    try {
+      // YYYYMMDDHHMM+ZZZZ -> 可读格式
+      const year = when.substring(0, 4);
+      const month = when.substring(4, 6);
+      const day = when.substring(6, 8);
+      const hour = when.substring(8, 10);
+      const minute = when.substring(10, 12);
       
-      const aiMessage = {
-        id: `ai-${Date.now()}`,
-        type: 'ai' as const,
-        timestamp: generateTimestamp(),
-        content: currentReply
-      };
+      return `${month}月${day}日 ${hour}:${minute}`;
+    } catch {
+      return when;
+    }
+  }, []);
 
-      setMessages(prev => [...prev, aiMessage]);
-      setCurrentReplyIndex(prev => prev + 1);
-    }, 1000 + Math.random() * 1000); // 1-2秒随机延迟
-  };
+  // 从描述中提取位置信息
+  const extractLocation = useCallback((description: string) => {
+    // 简单的位置提取逻辑，可以根据需要改进
+    const locationMatches = description.match(/(?:地点|位置|地址)[：:]\s*([^\n,，。]+)/);
+    return locationMatches ? locationMatches[1].trim() : undefined;
+  }, []);
+
+  // 主工作流程
+  const runWorkflow = useCallback(async (query: string) => {
+    let collectedSummary: Record<string, string> = {};
+    let webReport = '';
+
+    // 阶段 1: 信息收集
+    setCurrentStage('collecting');
+    const collectingMessage = addThinkingMessage('信息收集', '正在分析您的需求...');
+
+        await collect(modelV3, query, async (questions) => {
+      updateThinkingMessage(collectingMessage.id, '请回答以下问题以完善您的需求');
+      
+      // 显示第一个问题
+      if (questions.length > 0) {
+        addMessage('ai', [{
+          type: 'text',
+          data: { text: `为了更好地为您安排，我需要了解一些信息。\n\n问题 1/${questions.length}: ${questions[0]}` }
+        }]);
+
+        setPendingQuestions(questions);
+        setCurrentQuestionIndex(0);
+        setCollectedAnswers([]);
+        setWaitingForAnswers(true);
+
+        // 等待用户回答
+        return new Promise<string[]>((resolve) => {
+          answerResolverRef.current = resolve;
+        });
+      }
+      return [];
+    }, async (summary: Record<string, string>, reason: string) => {
+      collectedSummary = summary;
+      updateThinkingMessage(collectingMessage.id, '信息收集完成');
+      
+      addMessage('ai', [{
+        type: 'text',
+        data: { text: `信息收集完成：${reason}\n\n正在进行网络搜索以获取更多相关信息...` }
+      }]);
+    });
+
+    // 阶段 2: Web 搜索
+    setCurrentStage('searching');
+    const searchingMessage = addThinkingMessage('网络搜索', '正在搜索相关信息...');
+
+    await websearch(
+      modelFlash,
+      query,
+      Object.entries(collectedSummary).map(([key, value]) => `${key}: ${value}`).join('\n'),
+      async (summary) => {
+        webReport = Object.entries(summary).map(([key, value]) => `## ${key}\n\n${value}`).join('\n\n');
+        updateThinkingMessage(searchingMessage.id, '网络搜索完成');
+        
+        addMessage('ai', [{
+          type: 'text',
+          data: { text: '搜索完成，正在为您生成个性化的日程安排...' }
+        }]);
+      },
+      async (results) => {
+        updateThinkingMessage(searchingMessage.id, `搜索到 ${results.length} 个相关结果`);
+      },
+      async () => {
+        updateThinkingMessage(searchingMessage.id, '正在分析网页内容...');
+      },
+      async () => {
+        updateThinkingMessage(searchingMessage.id, '正在解析详细信息...');
+      }
+    );
+
+    // 阶段 3: 日程安排
+    setCurrentStage('scheduling');
+    const schedulingMessage = addThinkingMessage('日程规划', '正在生成您的专属日程...');
+
+    await schedule(
+      modelK2,
+      collectedSummary,
+      webReport,
+      async (timeline) => {
+        updateThinkingMessage(schedulingMessage.id, '日程安排完成');
+        
+        try {
+          const timelineData = JSON.parse(timeline);
+          
+          addMessage('ai', [{
+            type: 'text',
+            data: { text: '为您生成了以下日程安排：' }
+          }]);
+
+          // 为每个时间线项目创建事件卡片
+          timelineData.forEach((item: any) => {
+            addMessage('ai', [{
+              type: 'event',
+              data: {
+                eventData: {
+                  title: item.title,
+                  time: formatTimelineTime(item.when),
+                  location: extractLocation(item.description),
+                  statusMessage: item.description,
+                  locationIcon: 'placeFlag'
+                }
+              }
+            }]);
+          });
+          
+        } catch (error) {
+          console.error('解析时间线失败:', error);
+          addMessage('ai', [{
+            type: 'text',
+            data: { text: `日程安排完成：\n\n${timeline}` }
+          }]);
+        }
+      }
+    );
+
+    setCurrentStage('idle');
+  }, [modelV3, modelFlash, modelK2, addThinkingMessage, updateThinkingMessage, addMessage, formatTimelineTime, extractLocation]);
+
+
 
   // 自动滚动到底部
   const scrollToBottom = () => {
@@ -252,26 +406,6 @@ const ChatPage: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleMicrophoneClick = () => {
-    console.log('麦克风按钮点击');
-    // TODO: 实现语音输入功能
-  };
-
-  const handleAttachClick = () => {
-    console.log('附件按钮点击');
-    // TODO: 实现附件功能
-  };
-
-  const handleMenuClick = () => {
-    console.log('菜单按钮点击');
-    // TODO: 实现菜单功能
-  };
-
-  const handleAvatarClick = () => {
-    console.log('头像点击');
-    // TODO: 实现头像功能
-  };
-
   return (
     <div 
       className={`chat-page ${isLoaded ? 'loaded' : ''}`}
@@ -280,8 +414,6 @@ const ChatPage: React.FC = () => {
       <div className="chat-page-header">
         <AppBar
           title="Muer AI"
-          onMenuClick={handleMenuClick}
-          onAvatarClick={handleAvatarClick}
         />
       </div>
 
@@ -358,10 +490,14 @@ const ChatPage: React.FC = () => {
           ref={inputRef}
           value={inputValue}
           onChange={handleInputChange}
-          onMicrophoneClick={handleMicrophoneClick}
-          onAttachClick={handleAttachClick}
           onSubmit={handleSubmit}
-          placeholder="和 Muer AI 说说看你的规划问题？"
+          placeholder={
+            waitingForAnswers 
+              ? `请回答问题 ${currentQuestionIndex + 1}/${pendingQuestions.length}...` 
+              : isProcessing 
+                ? `正在${currentStage === 'collecting' ? '收集信息' : currentStage === 'searching' ? '搜索资料' : '规划日程'}...` 
+                : "和 Muer AI 说说看你的规划问题？"
+          }
         />
       </div>
     </div>

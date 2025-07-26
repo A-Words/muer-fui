@@ -21,8 +21,6 @@ const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(({
   placeholder = "和 Muer AI 说说看你的规划问题？",
   value = "",
   onChange,
-  onMicrophoneClick,
-  onAttachClick,
   onSubmit,
   onClick,
   readOnly = false,
@@ -79,23 +77,11 @@ const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(({
         <div className="icon-group">
           <button 
             className="icon-button"
-            onClick={onMicrophoneClick}
-            type="button"
-            aria-label="语音输入"
-          >
-            <div className="icon-container">
-              <img src={microphoneIcon} alt="麦克风" className="icon" />
-            </div>
-          </button>
-          
-          <button 
-            className="icon-button"
-            onClick={onAttachClick}
+            onClick={onSubmit}
             type="button"
             aria-label="附件"
           >
             <div className="icon-container">
-              <img src={attachIcon} alt="附件" className="icon" />
             </div>
           </button>
         </div>
