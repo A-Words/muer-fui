@@ -17,3 +17,7 @@ export type { RelatedLinksProps, LinkInfo } from './RelatedLinks';
 // 应用栏组件
 export { AppBar } from './AppBar';
 export type { AppBarProps } from './AppBar';
+
+// 基础输入框组件
+export { default as BaseInput } from './BaseInput';
+export type { BaseInputProps } from './BaseInput';

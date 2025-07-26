@@ -1,0 +1,147 @@
+/* BaseInput 组件样式 */
+.base-input {
+  position: relative;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.08);
+}
+
+.base-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  gap: 6px;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px 0;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.input-field {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'OPPO Sans 4.0', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #5a5a5a;
+  padding: 0;
+}
+
+.input-field::placeholder {
+  color: #5a5a5a;
+  opacity: 0.6;
+}
+
+.input-field:focus {
+  outline: none;
+}
+
+.icon-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.icon-button:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.icon-button:active {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  width: 22px;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  max-width: none;
+}
+
+.input-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .base-input-container {
+    padding: 0 12px;
+  }
+  
+  .input-field {
+    font-size: 14px;
+  }
+  
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* 焦点状态 */
+.base-input:focus-within .input-border {
+  border-color: #646cff;
+  box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.08), 0 0 0 2px rgba(100, 108, 255, 0.1);
+}
+
+/* 禁用状态 */
+.base-input.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.base-input.disabled .input-field {
+  cursor: not-allowed;
+}
+
+.base-input.disabled .icon-button {
+  cursor: not-allowed;
+}

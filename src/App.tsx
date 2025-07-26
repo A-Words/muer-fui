@@ -5,12 +5,15 @@ import PreMeetingNotes from './components/PreMeetingNotes'
 import AttendeeCard from './components/AttendeeCard'
 import MeetingRecorder from './components/MeetingRecorder'
 import RelatedLinks from './components/RelatedLinks'
+import BaseInput from './components/BaseInput'
+import BaseInputDemo from './components/BaseInputDemo'
 import { AppBar } from './components/AppBar'
 import type { LinkInfo } from './components/RelatedLinks'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [inputValue, setInputValue] = useState('')
 
   const handleStartRecording = () => {
     console.log('开始录制会议纪要');
@@ -18,6 +21,14 @@ function App() {
 
   const handleStopRecording = () => {
     console.log('会议录制结束');
+  };
+
+  const handleMicrophoneClick = () => {
+    console.log('语音输入按钮被点击');
+  };
+
+  const handleAttachClick = () => {
+    console.log('附件按钮被点击');
   };
 
   const relatedLinks: LinkInfo[] = [
@@ -116,7 +127,21 @@ function App() {
             onLinkClick={handleLinkClick}
           />
         </div>
+        
+        {/* 基础输入框组件 */}
+        <div className="input-section">
+          <BaseInput 
+            value={inputValue}
+            onChange={setInputValue}
+            onMicrophoneClick={handleMicrophoneClick}
+            onAttachClick={handleAttachClick}
+            placeholder="和 Muer AI 说说看你的规划问题？"
+          />
+        </div>
       </div>
+      
+      {/* BaseInput 演示页面 */}
+      <BaseInputDemo />
       
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
