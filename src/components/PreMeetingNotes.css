@@ -21,7 +21,7 @@
   width: 100%;
 }
 
-.icon-container {
+.pre-meeting-notes .icon-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +29,7 @@
   flex-shrink: 0;
 }
 
-.icon-wrapper {
+.pre-meeting-notes .icon-wrapper {
   width: 14px;
   height: 14px;
   position: relative;
