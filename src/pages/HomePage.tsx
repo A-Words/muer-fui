@@ -45,11 +45,11 @@ const HomePage: React.FC = () => {
 
   return (
     <div className={`home-page ${isTransitioning ? 'transitioning' : ''}`}>
-      <AppBar 
+      {/* <AppBar 
         title="Muer AI" 
         onMenuClick={() => console.log('菜单点击')}
         onAvatarClick={() => console.log('头像点击')}
-      />
+      /> */}
       <div className="home-page-content">
         {/* 顶部输入框 */}
         <div className="input-section">
@@ -65,9 +65,10 @@ const HomePage: React.FC = () => {
         {/* 会议信息 */}
         <div className="meeting-section">
           <MeetingInfo
-            time="7月30日 21:00 - 次日 01:00"
+            time="7月27日 09:00 - 17:00"
             status="进行中"
-            title="国际制品展会参展讨论"
+            title="AdventureX 2025 展会"
+            description="AdventureX 2025 展会"
           />
         </div>
         

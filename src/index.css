@@ -1,3 +1,7 @@
+* {
+  font-family: 'Source Sans 3 Variable', sans-serif !important;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

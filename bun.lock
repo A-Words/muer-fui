@@ -6,6 +6,7 @@
       "dependencies": {
         "@ai-sdk/openai-compatible": "^0.2.16",
         "@ai-sdk/react": "^1.2.12",
+        "@fontsource-variable/source-sans-3": "^5.2.8",
         "@openrouter/ai-sdk-provider": "^0.7.3",
         "@types/react-router-dom": "^5.3.3",
         "ai": "^4.3.19",
@@ -154,6 +155,8 @@
     "@eslint/object-schema": ["@eslint/object-schema@2.1.6", "https://registry.npmmirror.com/@eslint/object-schema/-/object-schema-2.1.6.tgz", {}, "sha512-RBMg5FRL0I0gs51M/guSAj5/e14VQ4tpZnQNWwuDT66P14I43ItmPfIZRhO9fUVIPOAQXU47atlywZ/czoqFPA=="],
 
     "@eslint/plugin-kit": ["@eslint/plugin-kit@0.3.4", "https://registry.npmmirror.com/@eslint/plugin-kit/-/plugin-kit-0.3.4.tgz", { "dependencies": { "@eslint/core": "^0.15.1", "levn": "^0.4.1" } }, "sha512-Ul5l+lHEcw3L5+k8POx6r74mxEYKG5kOb6Xpy2gCRW6zweT6TEhAf8vhxGgjhqrd/VO/Dirhsb+1hNpD1ue9hw=="],
+
+    "@fontsource-variable/source-sans-3": ["@fontsource-variable/source-sans-3@5.2.8", "https://registry.npmmirror.com/@fontsource-variable/source-sans-3/-/source-sans-3-5.2.8.tgz", {}, "sha512-iRQD4k06Wxm1668+AbPBoVo+CbgRsOz2E0/XibDJ7kAm9UhdhmNmsMTvs9KEl/mQxUj/487tr9w47NoM/TMhZQ=="],
 
     "@humanfs/core": ["@humanfs/core@0.19.1", "https://registry.npmmirror.com/@humanfs/core/-/core-0.19.1.tgz", {}, "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA=="],
 

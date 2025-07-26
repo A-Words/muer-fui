@@ -87,6 +87,7 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({
         })}
       </div>
       <div className="tab-border" />
+      <p className="version-info">此版本为演示用途构建，不代表最终品质。</p>
     </div>
   );
 };

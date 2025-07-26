@@ -11,13 +11,15 @@ export interface MeetingInfoProps {
   title: string;
   /** 自定义类名 */
   className?: string;
+  description?: string;
 }
 
 const MeetingInfo: React.FC<MeetingInfoProps> = ({
   time,
   status,
   title,
-  className = ''
+  className = '',
+  description
 }) => {
   const getStatusClass = (status: string) => {
     switch (status) {
@@ -44,6 +46,9 @@ const MeetingInfo: React.FC<MeetingInfoProps> = ({
       </div>
       <div className="meeting-title">
         {title}
+      </div>
+      <div className="meeting-description">
+        {description}
       </div>
     </div>
   );
