@@ -18,7 +18,7 @@ const PreMeetingNotes: React.FC<PreMeetingNotesProps> = ({
   className = ""
 }) => {
   return (
-    <div className={`pre-meeting-notes ${className}`} style={{ height: '129px' }}>
+    <div className={`pre-meeting-notes ${className}`} >
       {/* 标题区域 */}
       <div className="title-section">
         <div className="icon-container">

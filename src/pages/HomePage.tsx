@@ -96,12 +96,6 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
-      
-      {/* 底部导航栏 */}
-      {/* <BottomTabBar 
-        activeTabId="home"
-        onTabChange={handleTabChange}
-      /> */}
     </div>
   );
 };

@@ -56,7 +56,7 @@ const MeetingRecorder: React.FC<MeetingRecorderProps> = ({
   };
 
   return (
-    <div className={`meeting-recorder ${className}`} style={{ height: '129px' }}>
+    <div className={`meeting-recorder ${className}`}>
       {/* 标题区域 */}
       <div className="recorder-title">
         <div className="title-icon">
