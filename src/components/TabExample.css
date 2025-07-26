@@ -5,6 +5,8 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: #f8f9fa;
+  /* 移除移动端的tap highlight效果 */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .page-header {
@@ -41,8 +43,8 @@
 }
 
 .page-content {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   background: white;
   border-radius: 12px;
   padding: 30px;

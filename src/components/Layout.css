@@ -14,6 +14,7 @@
   padding: 0;
   margin: 0;
   /* 为底部Tab栏预留空间 */
+  width: 100%;
   margin-bottom: 80px;
 }
 

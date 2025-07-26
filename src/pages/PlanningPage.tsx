@@ -1,10 +1,18 @@
 import React from 'react';
+import AppBar from '../components/AppBar/AppBar';
 import './PlanningPage.css';
 
 const PlanningPage: React.FC = () => {
   return (
     <div className="planning-page">
-      {/* 规划页面 - 空白页面 */}
+      <AppBar 
+        title="规划" 
+        onMenuClick={() => console.log('菜单点击')}
+        onAvatarClick={() => console.log('头像点击')}
+      />
+      <div className="planning-page-content">
+        {/* 规划页面内容 */}
+      </div>
     </div>
   );
 };

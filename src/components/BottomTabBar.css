@@ -6,6 +6,8 @@
   width: 100%;
   height: auto;
   min-height: 64px;
+  /* 移除移动端的tap highlight效果 */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .tab-container {
@@ -33,10 +35,40 @@
   position: relative;
   box-sizing: border-box;
   transition: all 0.2s ease;
+  /* 移除移动端的tap highlight效果 */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .tab-item:hover {
   background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* 移动端触摸反馈效果 */
+.tab-item:active {
+  background-color: rgba(0, 0, 0, 0.08);
+  transform: scale(0.98);
+}
+
+/* 为移动设备优化触摸反馈 */
+@media (hover: none) and (pointer: coarse) {
+  .tab-item:hover {
+    background-color: transparent;
+  }
+  
+  .tab-item:active {
+    background-color: none;
+    transform: scale(0.96);
+  }
+  
+  .tab-item.active:active {
+    background-color: none;
+  }
 }
 
 .icon-container {
@@ -49,6 +81,8 @@
   border-radius: 16px;
   overflow: hidden;
   flex-shrink: 0;
+  /* 移除移动端的tap highlight效果 */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .tab-item.active .icon-container {
@@ -60,12 +94,23 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 56px;
+  width: 32px;
   height: 32px;
   padding: 0;
   position: relative;
   box-sizing: border-box;
   flex-shrink: 0;
+  /* 移除移动端的tap highlight效果 */
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.tab-item.active .icon-state-layer:active {
+  width: 72px;
+}
+
+.tab-item.active .icon-state-layer {
+  width: 52px;
 }
 
 .icon-wrapper {
@@ -119,10 +164,6 @@
     line-height: 16px;
   }
   
-  .icon-state-layer {
-    width: 48px;
-    height: 28px;
-  }
   
   .icon-wrapper {
     width: 20px;

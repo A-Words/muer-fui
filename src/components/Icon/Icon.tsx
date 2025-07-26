@@ -1,5 +1,6 @@
 import React from 'react';
 import './Icon.css';
+import { getIcon } from './iconRegistry';
 
 export interface IconProps {
   name: string;
@@ -16,13 +17,8 @@ const Icon: React.FC<IconProps> = ({
   className = '',
   onClick
 }) => {
-  // 动态导入SVG图标
-  const IconComponent = React.lazy(() =>
-    import(`../../assets/icons/${name}.svg?react`).catch(() =>
-      // 如果图标不存在，返回一个默认的占位符
-      import('../../assets/icons/default.svg?react')
-    )
-  );
+  // 从注册表获取图标组件
+  const IconComponent = getIcon(name);
 
   const iconStyle: React.CSSProperties = {
     width: typeof size === 'number' ? `${size}px` : size,
@@ -39,9 +35,7 @@ const Icon: React.FC<IconProps> = ({
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
     >
-      <React.Suspense fallback={<div className="icon-loading" />}>
-        <IconComponent />
-      </React.Suspense>
+      <IconComponent />
     </div>
   );
 };
