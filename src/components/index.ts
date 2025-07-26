@@ -49,3 +49,7 @@ export type { TaskItemProps } from './TaskItem';
 // 事件位置组件
 export { default as EventLocation } from './EventLocation';
 export type { EventLocationProps } from './EventLocation';
+
+// 聊天气泡组件
+export { default as ChatBubble } from './ChatBubble';
+export type { ChatBubbleProps } from './ChatBubble';

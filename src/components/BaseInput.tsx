@@ -11,6 +11,7 @@ export interface BaseInputProps {
   onChange?: (value: string) => void;
   onMicrophoneClick?: () => void;
   onAttachClick?: () => void;
+  onSubmit?: () => void;
   onClick?: () => void;
   readOnly?: boolean;
   className?: string;
@@ -22,6 +23,7 @@ const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(({
   onChange,
   onMicrophoneClick,
   onAttachClick,
+  onSubmit,
   onClick,
   readOnly = false,
   className = ""
@@ -29,6 +31,13 @@ const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!readOnly) {
       onChange?.(e.target.value);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      onSubmit?.();
     }
   };
 
@@ -57,6 +66,7 @@ const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(({
               type="text"
               value={value}
               onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
               onClick={handleInputClick}
               onFocus={handleInputFocus}
               placeholder={placeholder}
