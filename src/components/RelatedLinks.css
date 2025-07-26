@@ -231,45 +231,6 @@
   }
 }
 
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-  .related-links {
-    background: linear-gradient(to bottom, #1e3a5f, #1a1a1a);
-    box-shadow: 0px 6px 18px 0px rgba(255, 255, 255, 0.05);
-  }
-  
-  .title-text p {
-    color: #5ba7ff;
-  }
-  
-  .links-container {
-    background: #2a2a2a;
-  }
-  
-  .link-item {
-    background: #2a2a2a;
-  }
-  
-  .link-item:hover {
-    background: #3a3a3a;
-  }
-  
-  .link-item:focus {
-    outline-color: #5ba7ff;
-  }
-  
-  .link-name p {
-    color: #e5e5e5;
-  }
-  
-  .link-url p {
-    color: #a3a3a3;
-  }
-  
-  .link-item::after {
-    color: #5ba7ff;
-  }
-}
 
 /* 无障碍性 */
 @media (prefers-reduced-motion: reduce) {
@@ -286,11 +247,6 @@
   border-radius: 8px;
 }
 
-@media (prefers-color-scheme: dark) {
-  .link-item:focus-visible {
-    outline-color: #5ba7ff;
-  }
-}
 
 /* 加载状态 */
 .link-item.loading {

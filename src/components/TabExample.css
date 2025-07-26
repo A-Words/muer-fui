@@ -145,27 +145,3 @@
     font-size: 14px;
   }
 }
-
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-  .tab-example-container {
-    background-color: #1a1a1a;
-  }
-  
-  .page-content {
-    background: #2c2c2c;
-    color: white;
-  }
-  
-  .page-content h2 {
-    color: #ffffff;
-  }
-  
-  .page-content p {
-    color: #cccccc;
-  }
-  
-  .bottom-navigation {
-    background: #2c2c2c;
-  }
-}
