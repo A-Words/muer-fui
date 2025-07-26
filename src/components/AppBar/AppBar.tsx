@@ -1,5 +1,7 @@
+import { useLocation, useNavigate } from 'react-router';
 import './AppBar.css';
-
+import { useEffect, useMemo } from 'react';
+import backIcon from '../../assets/icons/arrowLeft.svg';
 interface AppBarProps {
   title?: string;
   avatarUrl?: string;
@@ -44,16 +46,27 @@ function MenuButton({ onClick }: { onClick?: () => void }) {
   );
 }
 
+export function BackButton({ onClick }: { onClick?: () => void }) {
+  return (
+    <button className="app-bar-back-button" onClick={onClick} aria-label="返回" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', borderRadius: '6px', background: 'transparent', color: '#1d1b20', cursor: 'pointer', transition: 'all 0.2s ease' }}>
+      <img src={backIcon} alt="返回" className="app-bar-back-button-icon" />
+    </button> 
+  )
+}
+
 export default function AppBar({ 
   title = "Muer AI", 
   avatarUrl,
   onMenuClick,
   onAvatarClick 
 }: AppBarProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <div className="app-bar">
       <div className="app-bar-left">
-        <MenuButton onClick={onMenuClick} />
+        { location.pathname !== '/' ? <BackButton onClick={() => navigate('/', { replace: true })} /> : <div style={{ width: '22px', height: '22px' }} /> }
       </div>
       
       <div className="app-bar-center">

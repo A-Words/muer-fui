@@ -2,8 +2,8 @@ import React, { forwardRef } from 'react';
 import './BaseInput.css';
 
 // 图片资源常量
-const microphoneIcon = "http://localhost:3845/assets/b7dc497c2bfffe9848b375d68ae6e1f095942d23.svg";
-const attachIcon = "http://localhost:3845/assets/86e3deb3c1bd3e1256523e2656c6d1f367b11394.svg";
+import microphoneIcon from '../assets/icons/record.svg';
+import attachIcon from '../assets/icons/edit.svg';
 
 export interface BaseInputProps {
   placeholder?: string;

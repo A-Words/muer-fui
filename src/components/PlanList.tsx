@@ -7,6 +7,8 @@ import type { EventStatusType } from './EventCard';
 import type { TaskItemProps } from './TaskItem';
 import './PlanList.css';
 
+import locationIcon from '../assets/icons/placeFlag.svg';
+
 /**
  * 事件数据接口
  */
@@ -80,16 +82,17 @@ const PlanList: React.FC<PlanListProps> = ({
   className = ''
 }) => {
   // 图标URLs（使用默认的localhost URLs）
-  const defaultIcons = {
-    menuIcon: "http://localhost:3845/assets/c1b06405d176b1601b820b1ad11f156431b291ff.svg",
-    locationIcon: "http://localhost:3845/assets/4d419ba8f89a744f1164433d662a061bbb01d56d.svg",
-    arrowIcon: "http://localhost:3845/assets/fb3f35dc52f019ba14f7985f8ab5f2cce1e7153a.svg",
-    separatorIcon: "http://localhost:3845/assets/ee390f3d85d093a5581a33e12f1761e061e04bec.svg",
-    suggestionIcon: "http://localhost:3845/assets/a31b552216bffb45e107601fc98585b75bde5ec1.svg",
-    microphoneIcon: "http://localhost:3845/assets/b7dc497c2bfffe9848b375d68ae6e1f095942d23.svg",
-    attachIcon: "http://localhost:3845/assets/86e3deb3c1bd3e1256523e2656c6d1f367b11394.svg",
-    ...icons
-  };
+
+  // const defaultIcons = {
+  //   menuIcon: "http://localhost:3845/assets/c1b06405d176b1601b820b1ad11f156431b291ff.svg",
+  //   locationIcon: "http://localhost:3845/assets/4d419ba8f89a744f1164433d662a061bbb01d56d.svg",
+  //   arrowIcon: "http://localhost:3845/assets/fb3f35dc52f019ba14f7985f8ab5f2cce1e7153a.svg",
+  //   separatorIcon: "http://localhost:3845/assets/ee390f3d85d093a5581a33e12f1761e061e04bec.svg",
+  //   suggestionIcon: "http://localhost:3845/assets/a31b552216bffb45e107601fc98585b75bde5ec1.svg",
+  //   microphoneIcon: "http://localhost:3845/assets/b7dc497c2bfffe9848b375d68ae6e1f095942d23.svg",
+  //   attachIcon: "http://localhost:3845/assets/86e3deb3c1bd3e1256523e2656c6d1f367b11394.svg",
+  //   ...icons
+  // };
 
   // 处理事件点击
   const handleEventClick = (eventId: string) => {
@@ -143,13 +146,10 @@ const PlanList: React.FC<PlanListProps> = ({
               timeDescription={event.timeDescription}
               timeRange={event.timeRange}
               location={event.location}
-              locationIconUrl={event.locationIconUrl || defaultIcons.locationIcon}
+              locationIconUrl={event.locationIconUrl || locationIcon}
               status={event.status}
               tasks={event.tasks?.map((task, taskIndex) => ({
                 ...task,
-                arrowIconUrl: task.arrowIconUrl || defaultIcons.arrowIcon,
-                separatorIconUrl: task.separatorIconUrl || defaultIcons.separatorIcon,
-                suggestionIconUrl: task.suggestionIconUrl || defaultIcons.suggestionIcon,
                 onClick: () => handleTaskClick(event.id, taskIndex),
                 onSuggestionClick: () => handleSuggestionClick(event.id, taskIndex),
               }))}
