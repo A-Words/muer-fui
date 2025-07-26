@@ -1,0 +1,186 @@
+/* ToolCard 组件样式 - 100% 还原 Figma 设计 */
+
+.tool-card {
+  width: 100%;
+  padding: 0 6px;
+  cursor: pointer;
+}
+
+.tool-card__container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
+  box-shadow: 
+    0px 0px 1px 0px rgba(0, 0, 0, 0.2),
+    0px 6px 18px 0px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+/* 标题部分 */
+.tool-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.tool-card__title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-radius: 6px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.tool-card__title p {
+  margin: 0;
+  padding: 0;
+  font-family: 'OPPO Sans 4.0', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #5a5a5a;
+  text-align: left;
+}
+
+/* 主要内容部分 */
+.tool-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.tool-card__main-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.tool-card__main-text p {
+  margin: 0;
+  padding: 0;
+  font-family: 'OPPO Sans 4.0', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  color: #3c3c3c;
+  text-align: left;
+  white-space: pre;
+  flex-shrink: 0;
+}
+
+.tool-card__description {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-radius: 6px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.tool-card__description p {
+  margin: 0;
+  padding: 0;
+  font-family: 'OPPO Sans 4.0', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #5a5a5a;
+  text-align: left;
+  flex: 1;
+  min-width: 0;
+}
+
+/* 操作按钮部分 */
+.tool-card__action {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 2px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tool-card__action-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 6px 6px 4px 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  transition: background-color 0.2s ease;
+}
+
+.tool-card__action-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tool-card__action-content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  padding: 8px 0;
+}
+
+.tool-card__action-text {
+  font-family: 'OPPO Sans 4.0', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #5a5a5a;
+  text-align: left;
+  flex: 1;
+  min-width: 0;
+}
+
+.tool-card__action-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.tool-card__arrow-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 480px) {
+  .tool-card__container {
+    padding: 10px;
+  }
+  
+  .tool-card__main-text p {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}

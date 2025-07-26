@@ -1,0 +1,117 @@
+/* PersonCard 组件样式 - 100% 还原 Figma 设计 */
+
+.person-card {
+  width: 100%;
+  position: relative;
+}
+
+.person-card__content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px; /* gap-block-space */
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* 头像容器 */
+.person-card__avatar {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 100px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.person-card__avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100px;
+}
+
+.person-card__avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #ECE6F0; /* M3/.add-on/placeholder image */
+  border-radius: 100px;
+}
+
+/* 信息区域 */
+.person-card__info {
+  flex: 1;
+  min-width: 0;
+  min-height: 1px;
+}
+
+.person-card__name {
+  margin: 0;
+  padding: 0;
+  font-family: 'OPPO Sans 4.0', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 300; /* font-weight-light */
+  font-size: 24px; /* size-large */
+  line-height: 30px; /* line-height-large */
+  color: #3C3C3C; /* text/text-normal-title-black */
+  text-align: left;
+  font-style: normal;
+}
+
+/* 不同尺寸变体 */
+.person-card--small .person-card__avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.person-card--small .person-card__name {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.person-card--small .person-card__content {
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.person-card--medium .person-card__avatar {
+  width: 52px;
+  height: 52px;
+}
+
+.person-card--medium .person-card__name {
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.person-card--medium .person-card__content {
+  gap: 12px;
+  padding: 0 16px;
+}
+
+.person-card--large .person-card__avatar {
+  width: 64px;
+  height: 64px;
+}
+
+.person-card--large .person-card__name {
+  font-size: 28px;
+  line-height: 34px;
+}
+
+.person-card--large .person-card__content {
+  gap: 16px;
+  padding: 0 20px;
+}
+
+/* 响应式调整 */
+@media (max-width: 480px) {
+  .person-card__content {
+    padding: 0 12px;
+  }
+  
+  .person-card--medium .person-card__name {
+    font-size: 20px;
+    line-height: 26px;
+  }
+}

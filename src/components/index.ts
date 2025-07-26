@@ -65,3 +65,15 @@ export type { ThinkingCardProps, ThinkingStep } from './ThinkingCard';
 // 聊天事件卡片组件
 export { default as ChatEventCard } from './ChatEventCard';
 export type { ChatEventCardProps } from './ChatEventCard';
+
+// 人名片组件
+export { default as PersonCard } from './PersonCard';
+export type { PersonCardProps } from './PersonCard';
+
+// 记忆卡片组件
+export { default as MemoryCard } from './MemoryCard';
+export type { MemoryCardProps } from './MemoryCard';
+
+// 工具卡片组件
+export { default as ToolCard } from './ToolCard';
+export type { ToolCardProps } from './ToolCard';
