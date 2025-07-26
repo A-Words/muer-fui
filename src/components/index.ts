@@ -17,3 +17,7 @@ export type { RelatedLinksProps, LinkInfo } from './RelatedLinks';
 // 应用栏组件
 export { AppBar } from './AppBar';
 export type { AppBarProps } from './AppBar';
+
+// 底部Tab栏组件
+export { default as BottomTabBar } from './BottomTabBar';
+export type { BottomTabBarProps, TabItem } from './BottomTabBar';
