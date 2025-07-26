@@ -23,7 +23,7 @@ const EventLocation: React.FC<EventLocationProps> = ({
   return (
     <div className={`event-location ${className}`}>
       <div className="event-location__icon">
-        <Icon name="placeFlag" />
+        <Icon name="placeFlag" size={22} />
       </div>
       <span className="event-location__text">{location}</span>
     </div>

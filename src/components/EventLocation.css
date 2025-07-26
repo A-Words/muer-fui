@@ -8,16 +8,10 @@
 
 .event-location__icon {
   display: flex;
-  align-items: center;
-  justify-content: center;
   height: 18px;
-  flex-shrink: 0;
-}
-
-.event-location__icon img {
+  justify-content: center;
+  align-items: center;
   width: 14px;
-  height: 14px;
-  object-fit: contain;
 }
 
 .event-location__text {
