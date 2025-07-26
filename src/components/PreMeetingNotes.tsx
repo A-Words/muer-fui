@@ -1,5 +1,6 @@
 import React from 'react';
 import './PreMeetingNotes.css';
+import { Icon } from './index';
 
 export interface PreMeetingNotesProps {
   title?: string;
@@ -20,7 +21,11 @@ const PreMeetingNotes: React.FC<PreMeetingNotesProps> = ({
     <div className={`pre-meeting-notes ${className}`} style={{ height: '129px' }}>
       {/* 标题区域 */}
       <div className="title-section">
-        {/* Image removed from here */}
+        <div className="icon-container">
+          <div className="icon-wrapper">
+            <Icon name="note" className="icon" />
+          </div>
+        </div>
         <div className="title-text">
           <p>{title}</p>
         </div>

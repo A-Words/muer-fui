@@ -1,5 +1,6 @@
 import React from 'react';
 import './MeetingInfo.css';
+import { Icon } from './index';
 
 export interface MeetingInfoProps {
   /** 会议时间 */
@@ -33,11 +34,13 @@ const MeetingInfo: React.FC<MeetingInfoProps> = ({
 
   return (
     <div className={`meeting-info ${className}`}>
-      <div className="meeting-time-status">
-        <span className="meeting-time">{time}</span>
-        <span className={`meeting-status ${getStatusClass(status)}`}>
-          {status}
-        </span>
+      <div className="meeting-header">
+        <div className="meeting-time-status">
+          <span className="meeting-time">{time}</span>
+          <span className={`meeting-status ${getStatusClass(status)}`}>
+            {status}
+          </span>
+        </div>
       </div>
       <div className="meeting-title">
         {title}

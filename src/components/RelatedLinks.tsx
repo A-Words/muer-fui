@@ -1,9 +1,10 @@
 import React from 'react';
 import './RelatedLinks.css';
+import { Icon } from './index';
 
-// 图片资源常量
-const linkIcon = "http://localhost:3845/assets/33eec501a92dea9f26869ecf0940ced48fbd2fe6.svg";
-const dividerIcon = "http://localhost:3845/assets/dc0646cf93617253d51c19f3cc619470a10aa64d.svg";
+// 导入本地图片资源
+import ellipse42Pic from '../assets/pic/Ellipse 4-2pic.png'; // advx
+import ellipse43Pic from '../assets/pic/Ellipse 4-3pic.png'; // 飞书
 
 // 链接数据接口
 export interface LinkInfo {
@@ -28,13 +29,13 @@ const RelatedLinks: React.FC<RelatedLinksProps> = ({
       id: '1',
       name: 'United Portal',
       url: 'adventure-x.org',
-      icon: 'http://localhost:3845/assets/f552894ad3e3f2980f528fdc9adf97c9c0fc6a9b.png'
+      icon: ellipse42Pic
     },
     {
       id: '2',
       name: '飞书',
       url: 'feishu.cn',
-      icon: 'http://localhost:3845/assets/168bcb13087a8786a3c85194f8488032551897ac.png'
+      icon: ellipse43Pic
     }
   ],
   className = "",
@@ -58,7 +59,7 @@ const RelatedLinks: React.FC<RelatedLinksProps> = ({
       <div className="links-title">
         <div className="title-icon">
           <div className="icon-wrapper">
-            <img src={linkIcon} alt="链接图标" className="link-title-icon" />
+            <Icon name="link" className="link-title-icon"/>
           </div>
         </div>
         <div className="title-text">
@@ -102,7 +103,7 @@ const RelatedLinks: React.FC<RelatedLinksProps> = ({
             {/* 分隔线（最后一个项目不显示） */}
             {index < links.length - 1 && (
               <div className="divider">
-                <img src={dividerIcon} alt="分隔线" className="divider-line" />
+                <div className="divider-line" />
               </div>
             )}
           </React.Fragment>

@@ -25,13 +25,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 18px;
   flex-shrink: 0;
 }
 
 .pre-meeting-notes .icon-wrapper {
-  width: 14px;
-  height: 14px;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
@@ -52,7 +49,7 @@
   min-width: 0;
 }
 
-.title-text p {
+.pre-meeting-notes .title-text p {
   font-family: 'OPPO Sans 4.0', 'Microsoft YaHei', sans-serif;
   font-size: 14px;
   font-weight: 400;

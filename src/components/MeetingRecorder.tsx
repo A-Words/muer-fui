@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './MeetingRecorder.css';
-
-// 图片资源常量
-const recordIcon = "http://localhost:3845/assets/87ee2ba4153fda28423d49fb7dabff94097f1ed2.svg";
+import { Icon } from './index';
 
 export interface MeetingRecorderProps {
   title?: string;
@@ -63,7 +61,7 @@ const MeetingRecorder: React.FC<MeetingRecorderProps> = ({
       <div className="recorder-title">
         <div className="title-icon">
           <div className="icon-wrapper">
-            <img src={recordIcon} alt="录制图标" className="record-icon" />
+            <Icon name="record" className="record-icon"/>
           </div>
         </div>
         <div className="title-text">

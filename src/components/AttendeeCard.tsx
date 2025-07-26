@@ -1,10 +1,10 @@
 import React from 'react';
 import './AttendeeCard.css';
+import { Icon } from './index';
 
-// 图片资源常量 - 实际项目中这些应该替换为本地资源或CDN链接
-const iconUser = "http://localhost:3845/assets/74ffe2c6c1fe82efb6aad849208f572fd7a34d1b.svg";
-const iconGroup = "http://localhost:3845/assets/82a6142b200f797d06114e40ba5c28bcd3885167.svg";
-const dividerIcon = "http://localhost:3845/assets/dc0646cf93617253d51c19f3cc619470a10aa64d.svg";
+// 导入本地图片资源
+import ellipse4Pic from '../assets/pic/Ellipse 4pic.png';
+import ellipse41Pic from '../assets/pic/Ellipse 4-1pic.png';
 
 // 参会人员数据接口
 export interface AttendeeInfo {
@@ -27,13 +27,13 @@ const AttendeeCard: React.FC<AttendeeCardProps> = ({
       id: '1',
       name: '张岚风',
       title: '展会负责人',
-      avatar: 'http://localhost:3845/assets/dd7fc6e62db72bf1a2669a0277f8d63145853883.png'
+      avatar: ellipse4Pic
     },
     {
       id: '2',
       name: 'Ariana Grande',
       title: '参会厂商',
-      avatar: 'http://localhost:3845/assets/037deda8a40d6c58c4befc365a66e0bae635fc9e.png'
+      avatar: ellipse41Pic
     }
   ],
   className = ""
@@ -44,8 +44,7 @@ const AttendeeCard: React.FC<AttendeeCardProps> = ({
       <div className="card-title">
         <div className="title-icons">
           <div className="icon-wrapper">
-            <img src={iconGroup} alt="人员图标1" className="icon icon-primary" />
-            <img src={iconUser} alt="人员图标2" className="icon icon-secondary" />
+            <Icon name="people" className="icon icon-primary"/>
           </div>
         </div>
         <div className="title-text">
@@ -77,7 +76,7 @@ const AttendeeCard: React.FC<AttendeeCardProps> = ({
             {/* 分隔线（最后一个项目不显示） */}
             {index < attendees.length - 1 && (
               <div className="divider">
-                <img src={dividerIcon} alt="分隔线" className="divider-line" />
+                <div className="divider-line" />
               </div>
             )}
           </React.Fragment>

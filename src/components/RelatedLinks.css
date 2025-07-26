@@ -25,13 +25,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 18px;
   flex-shrink: 0;
 }
 
 .related-links .icon-wrapper {
-  width: 14px;
-  height: 14px;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
@@ -56,7 +53,7 @@
   min-width: 0;
 }
 
-.title-text p {
+.related-links .title-text p {
   font-family: 'OPPO Sans 4.0', 'Microsoft YaHei', sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -94,18 +91,12 @@
 
 .link-item:hover {
   background: #f8f9fa;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(17, 86, 160, 0.1);
 }
 
 .link-item:active {
-  transform: translateY(0);
+  background: #f8f9fa;
 }
 
-.link-item:focus {
-  outline: 2px solid #1156a0;
-  outline-offset: 2px;
-}
 
 .link-icon-container {
   width: 30px;
@@ -181,36 +172,19 @@
   position: relative;
   display: flex;
   justify-content: flex-end;
-  padding-right: 12px;
+  padding-left: 42px;
+  padding-right: 0px;
   box-sizing: border-box;
 }
 
 .divider-line {
-  width: 122px;
+  width: 100%;
   height: 1px;
   display: block;
-  max-width: none;
+  background-color: rgba(225, 225, 225, 1);
 }
 
-/* 点击波纹效果 */
-.link-item::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(17, 86, 160, 0.1);
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease;
-  pointer-events: none;
-}
 
-.link-item:active::before {
-  width: 100%;
-  height: 100%;
-}
 
 /* 外部链接指示器 */
 .link-item::after {
@@ -277,7 +251,6 @@
   
   .link-item:hover {
     background: #3a3a3a;
-    box-shadow: 0 2px 4px rgba(91, 167, 255, 0.1);
   }
   
   .link-item:focus {
@@ -295,22 +268,13 @@
   .link-item::after {
     color: #5ba7ff;
   }
-  
-  .link-item::before {
-    background: rgba(91, 167, 255, 0.1);
-  }
 }
 
 /* 无障碍性 */
 @media (prefers-reduced-motion: reduce) {
   .link-item,
-  .link-item::before,
   .link-item::after {
     transition: none;
-  }
-  
-  .link-item:hover {
-    transform: none;
   }
 }
 

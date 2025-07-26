@@ -46,6 +46,7 @@
   /* Adjusted margin for spacing from input */
   padding: 0 16px;
   margin-bottom: 24px;
+  box-sizing: border-box;
 }
 
 .features-section {

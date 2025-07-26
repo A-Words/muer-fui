@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, BaseInput, BottomTabBar, MeetingInfo, PreMeetingNotes, MeetingRecorder, AttendeeCard, RelatedLinks } from '../components';
+import { AppBar, BaseInput, MeetingInfo, PreMeetingNotes, MeetingRecorder, AttendeeCard, RelatedLinks } from '../components';
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
