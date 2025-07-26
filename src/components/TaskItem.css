@@ -1,0 +1,181 @@
+/* 任务项组件样式 */
+.task-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--box-normal-Background-whiteOnly, #ffffff);
+  border-radius: var(--border-radius-middle, 8px);
+  overflow: hidden;
+}
+
+.task-item__main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--padding-default, 8px) var(--padding-middle, 10px);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.task-item__main:hover {
+  background-color: var(--box-normal-lightBackground-white, #f0f0f0);
+}
+
+.task-item__content {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--gap-inside-space, 4px);
+}
+
+.task-item__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside, 2px);
+  flex: 1;
+  min-width: 0;
+}
+
+.task-item__title {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--size-regular, 14px);
+  line-height: var(--line-height-regular, 18px);
+  color: var(--text-normal-text-black, #5a5a5a);
+  margin: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.task-item__description {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--size-small, 12px);
+  line-height: var(--line-height-small, 16px);
+  color: #787878;
+  margin: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.task-item__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-inside-space, 4px);
+  height: 100%;
+}
+
+.task-item__separator {
+  height: 14px;
+  width: 0;
+  position: relative;
+}
+
+.task-item__separator img {
+  width: 1px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.task-item__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+}
+
+.task-item__arrow img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+/* 建议区域样式 */
+.task-item__suggestion {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-inside-space, 4px);
+  padding: var(--padding-default, 8px) var(--padding-middle, 10px);
+  background-color: var(--box-warning-lightBackground, #fcf9e2);
+  border-top: 1px solid var(--border-normal-light, #e1e1e1);
+}
+
+.task-item__suggestion-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.task-item__suggestion-icon img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.task-item__suggestion-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-item__suggestion-text {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--size-regular, 14px);
+  line-height: var(--line-height-regular, 18px);
+  color: var(--text-normal-text-black, #5a5a5a);
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.task-item__suggestion-button {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-inside, 2px);
+  padding: var(--padding-tiny, 4px) var(--padding-default, 8px);
+  background: none;
+  border: none;
+  border-radius: var(--border-radius-small, 6px);
+  cursor: pointer;
+  min-width: 46px;
+  transition: background-color 0.2s ease;
+}
+
+.task-item__suggestion-button:hover {
+  background-color: rgba(90, 90, 90, 0.1);
+}
+
+.task-item__suggestion-button span {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--size-regular, 14px);
+  line-height: var(--line-height-regular, 18px);
+  color: var(--text-normal-text-black, #5a5a5a);
+  white-space: nowrap;
+}
+
+.task-item__suggestion-button img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+/* 状态样式 */
+.task-item--waiting .task-item__main {
+  background-color: var(--box-normal-lightBackground-white, #f0f0f0);
+  border-radius: var(--border-radius-small, 6px) var(--border-radius-small, 6px) var(--border-radius-extra-small-2, 4px) var(--border-radius-extra-small-2, 4px);
+}
+
+.task-item--in-progress .task-item__title {
+  color: var(--text-theme-primary-black, #a02310);
+}
+
+.task-item--completed .task-item__title {
+  text-decoration: line-through;
+  opacity: 0.6;
+}

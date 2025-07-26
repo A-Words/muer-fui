@@ -1,0 +1,41 @@
+/* 事件位置组件样式 */
+.event-location {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-inside, 2px);
+  width: 100%;
+}
+
+.event-location__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.event-location__icon img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.event-location__text {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--size-regular, 14px);
+  line-height: var(--line-height-regular, 18px);
+  color: var(--text-normal-text-black, #5a5a5a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 主题变色支持 */
+.event-location--primary .event-location__text {
+  color: var(--text-theme-primary-black, #a02310);
+}
+
+.event-location--secondary .event-location__text {
+  color: var(--text-normal-text-black, #5a5a5a);
+}

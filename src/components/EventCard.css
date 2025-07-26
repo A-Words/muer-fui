@@ -1,0 +1,159 @@
+/* 事件卡片组件样式 */
+.event-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-content-space, 8px);
+  height: 320px;
+  padding: 0 var(--padding-small, 6px);
+  width: 100%;
+}
+
+.event-card__clickable {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+}
+
+.event-card__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-block-space, 12px);
+  flex: 1;
+  min-height: 0;
+  padding: var(--padding-big, 12px);
+  background-color: var(--box-normal-Background-whiteOnly, #ffffff);
+  border-radius: var(--border-radius-big, 12px);
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 6px 18px 0px rgba(0, 0, 0, 0.08);
+}
+
+.event-card__container--gradient-active {
+  background: linear-gradient(180deg, var(--box-theme-lightBackground, #fdebe3) 0%, var(--box-normal-Background-whiteOnly, #ffffff) 100%);
+}
+
+.event-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-content-space, 8px);
+  width: 100%;
+}
+
+.event-card__title-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside, 2px);
+  overflow: hidden;
+  border-radius: var(--border-radius-small, 6px);
+  width: 100%;
+}
+
+.event-card__time-description {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside, 2px);
+  overflow: hidden;
+  width: 100%;
+}
+
+.event-card__time-description {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--size-regular, 14px);
+  line-height: var(--line-height-regular, 18px);
+  color: var(--text-normal-text-black, #5a5a5a);
+}
+
+.event-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside-space, 4px);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 0 var(--padding-middle, 10px) 0;
+  border-radius: var(--border-radius-middle, 8px);
+}
+
+.event-card__main-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside-space, 4px);
+}
+
+.event-card__title {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-medium, 500);
+  font-size: var(--size-large, 24px);
+  line-height: var(--line-height-large, 30px);
+  color: var(--text-normal-title-black, #3c3c3c);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-card__time-range {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-light, 300);
+  font-size: var(--size-big, 18px);
+  line-height: var(--line-height-big, 22px);
+  color: var(--text-normal-text-black, #5a5a5a);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-card__tasks {
+  background-color: var(--box-normal-lightBackground-white, #f0f0f0);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside, 2px);
+  overflow: hidden;
+  padding: var(--padding-min, 2px);
+  border-radius: var(--border-radius-middle, 8px);
+  width: 100%;
+}
+
+.event-card__task-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside, 2px);
+  width: 100%;
+}
+
+.event-card__task-item {
+  width: 100%;
+}
+
+/* 状态样式 */
+.event-card--active .event-card__title {
+  color: var(--text-theme-primary-black, #a02310);
+}
+
+.event-card--active .event-card__time-range {
+  color: var(--text-theme-primary-black, #a02310);
+}
+
+.event-card--upcoming .event-card__title {
+  color: var(--text-normal-title-black, #3c3c3c);
+}
+
+.event-card--upcoming .event-card__time-range {
+  color: var(--text-normal-text-black, #5a5a5a);
+}
+
+.event-card--completed {
+  opacity: 0.8;
+}
+
+.event-card--completed .event-card__title {
+  color: var(--text-normal-text-black, #5a5a5a);
+}
+
+.event-card--completed .event-card__time-range {
+  color: var(--text-normal-text-black, #5a5a5a);
+}

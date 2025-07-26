@@ -13,9 +13,9 @@ const HomePage: React.FC = () => {
     console.log('附件点击');
   };
   
-  const handleTabChange = (tabId: string) => {
-    console.log('Tab changed to:', tabId);
-  };
+  // const handleTabChange = (tabId: string) => {
+  //   console.log('Tab changed to:', tabId);
+  // };
   
   const handleStartRecording = () => {
     console.log('开始会议纪要录制');
