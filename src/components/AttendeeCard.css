@@ -212,42 +212,9 @@
   }
 }
 
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-  .attendee-card {
-    background: linear-gradient(to bottom, #1a2b1f, #1a1a1a);
-    box-shadow: 0px 6px 18px 0px rgba(255, 255, 255, 0.05);
-  }
-  
-  .title-text p {
-    color: #4ade80;
-  }
-  
-  .attendees-container {
-    background: #2a2a2a;
-  }
-  
-  .attendee-item {
-    background: #2a2a2a;
-  }
-  
-  .attendee-name p {
-    color: #e5e5e5;
-  }
-  
-  .attendee-title p {
-    color: #a3a3a3;
-  }
-}
 
 /* 悬停效果 */
 .attendee-item:hover {
   background: #f8f9fa;
   transition: background-color 0.2s ease;
-}
-
-@media (prefers-color-scheme: dark) {
-  .attendee-item:hover {
-    background: #3a3a3a;
-  }
 }

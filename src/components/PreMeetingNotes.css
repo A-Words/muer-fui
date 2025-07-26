@@ -124,19 +124,3 @@
     line-height: 16px;
   }
 }
-
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-  .pre-meeting-notes {
-    background: linear-gradient(to bottom, #2a2518, #1a1a1a);
-    box-shadow: 0px 6px 18px 0px rgba(255, 255, 255, 0.05);
-  }
-  
-  .title-text p {
-    color: #d4b854;
-  }
-  
-  .notes-list ol {
-    color: #b8b8b8;
-  }
-}
