@@ -1,0 +1,273 @@
+/* 会议纪要录制组件样式 */
+.meeting-recorder {
+  background: linear-gradient(to bottom, #fdebe3, #ffffff);
+  border-radius: 16px;
+  box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.08);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* 标题区域 */
+.recorder-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.title-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.icon-wrapper {
+  width: 14px;
+  height: 14px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.record-icon {
+  position: absolute;
+  width: 88.577%;
+  height: 80%;
+  bottom: 10%;
+  left: 7.5%;
+  right: 3.923%;
+  top: 10%;
+  display: block;
+  max-width: none;
+}
+
+.title-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.title-text p {
+  font-family: 'OPPO Sans 4.0', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #a02310;
+  margin: 0;
+  text-align: left;
+}
+
+/* 内容区域 */
+.recorder-content {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 120px;
+  justify-content: center;
+}
+
+/* 时间显示 */
+.time-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.time-text {
+  font-family: 'Arial', 'Microsoft YaHei', monospace;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 44px;
+  color: #3c3c3c;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.time-minutes {
+  color: #3c3c3c;
+}
+
+.time-seconds {
+  color: #3c3c3c;
+}
+
+/* 录制按钮 */
+.record-button {
+  background: #f2502c;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 12px;
+  width: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.record-button:hover {
+  background: #e6472a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(242, 80, 44, 0.3);
+}
+
+.record-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(242, 80, 44, 0.3);
+}
+
+.record-button.recording {
+  background: #dc2626;
+  animation: recording-pulse 2s infinite;
+}
+
+.record-button.recording:hover {
+  background: #b91c1c;
+}
+
+@keyframes recording-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-content p {
+  font-family: 'OPPO Sans 4.0', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 录制状态指示器 */
+.record-button.recording::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+  animation: recording-blink 1s infinite;
+}
+
+@keyframes recording-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0.3;
+  }
+}
+
+.record-button.recording .button-content {
+  margin-left: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .meeting-recorder {
+    padding: 8px;
+    border-radius: 12px;
+  }
+  
+  .title-text p {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  
+  .time-text {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  
+  .button-content p {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  
+  .recorder-content {
+    min-height: 100px;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .meeting-recorder {
+    background: linear-gradient(to bottom, #3d2317, #1a1a1a);
+    box-shadow: 0px 6px 18px 0px rgba(255, 255, 255, 0.05);
+  }
+  
+  .title-text p {
+    color: #ff7f5c;
+  }
+  
+  .recorder-content {
+    background: #2a2a2a;
+  }
+  
+  .time-text {
+    color: #e5e5e5;
+  }
+  
+  .time-minutes,
+  .time-seconds {
+    color: #e5e5e5;
+  }
+}
+
+/* 可访问性 */
+.record-button:focus {
+  outline: 2px solid #f2502c;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .record-button {
+    transition: none;
+  }
+  
+  .recording-pulse,
+  .recording-blink {
+    animation: none;
+  }
+  
+  .record-button.recording {
+    opacity: 0.9;
+  }
+}

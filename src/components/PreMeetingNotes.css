@@ -1,0 +1,149 @@
+/* 会前笔记组件样式 */
+.pre-meeting-notes {
+  background: linear-gradient(to bottom, #fcf9e2, #ffffff);
+  border-radius: 16px;
+  box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.08);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* 标题区域 */
+.title-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.icon-wrapper {
+  width: 14px;
+  height: 14px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  max-width: none;
+}
+
+.title-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.title-text p {
+  font-family: 'OPPO Sans 4.0', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #9e720b;
+  margin: 0;
+  text-align: left;
+}
+
+/* 笔记列表区域 */
+.notes-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notes-list ol {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  list-style: decimal;
+  font-family: 'OPPO Sans 4.0', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #5a5a5a;
+  min-width: 0;
+}
+
+.notes-list ol li {
+  margin-bottom: 0;
+  margin-left: 21px;
+}
+
+.notes-list ol li span {
+  line-height: 18px;
+}
+
+/* 背景图片区域 */
+.background-image-section {
+  flex: 1;
+  width: 100%;
+  min-height: 60px;
+  background-size: 125.15% 210.95%;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-image: url('http://localhost:3845/assets/2fd736db9d4881f7002d98d7e07714fe29c63149.png');
+  border-radius: 8px;
+  padding: 4px 6px;
+  display: flex;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .pre-meeting-notes {
+    padding: 8px;
+    border-radius: 12px;
+  }
+  
+  .title-text p {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  
+  .notes-list ol {
+    font-size: 13px;
+  }
+  
+  .notes-list ol li span {
+    line-height: 16px;
+  }
+  
+  .background-image-section {
+    min-height: 50px;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .pre-meeting-notes {
+    background: linear-gradient(to bottom, #2a2518, #1a1a1a);
+    box-shadow: 0px 6px 18px 0px rgba(255, 255, 255, 0.05);
+  }
+  
+  .title-text p {
+    color: #d4b854;
+  }
+  
+  .notes-list ol {
+    color: #b8b8b8;
+  }
+}

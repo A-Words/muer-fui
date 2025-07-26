@@ -1,0 +1,254 @@
+/* 参会人名片组件样式 */
+.attendee-card {
+  background: linear-gradient(to bottom, #d5eddf, #ffffff);
+  border-radius: 16px;
+  box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.08);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* 标题区域 */
+.card-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.title-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.icon-wrapper {
+  width: 14px;
+  height: 14px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.icon {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+
+.icon-primary {
+  width: 75.5%;
+  height: 81.7%;
+  bottom: 9.167%;
+  left: 3.472%;
+  right: 20.972%;
+  top: 9.167%;
+}
+
+.icon-secondary {
+  width: 41.2%;
+  height: 74%;
+  bottom: 10.417%;
+  left: 54.954%;
+  right: 3.846%;
+  top: 15.557%;
+}
+
+.title-text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.title-text p {
+  font-family: 'OPPO Sans 4.0', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #057652;
+  margin: 0;
+  text-align: left;
+}
+
+/* 参会人员容器 */
+.attendees-container {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 参会人员项目 */
+.attendee-item {
+  background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 8px 8px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.avatar-container {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  max-width: none;
+}
+
+.attendee-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.attendee-name {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.attendee-name p {
+  font-family: 'OPPO Sans 4.0', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #5a5a5a;
+  margin: 0;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.attendee-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.attendee-title p {
+  font-family: 'OPPO Sans 4.0', 'Microsoft YaHei', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #787878;
+  margin: 0;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+/* 分隔线 */
+.divider {
+  height: 1px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 12px;
+  box-sizing: border-box;
+}
+
+.divider-line {
+  width: 122px;
+  height: 1px;
+  display: block;
+  max-width: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .attendee-card {
+    padding: 8px;
+    border-radius: 12px;
+  }
+  
+  .title-text p {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  
+  .attendee-name p {
+    font-size: 13px;
+    line-height: 16px;
+  }
+  
+  .attendee-title p {
+    font-size: 11px;
+    line-height: 14px;
+  }
+  
+  .avatar-container {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .attendee-card {
+    background: linear-gradient(to bottom, #1a2b1f, #1a1a1a);
+    box-shadow: 0px 6px 18px 0px rgba(255, 255, 255, 0.05);
+  }
+  
+  .title-text p {
+    color: #4ade80;
+  }
+  
+  .attendees-container {
+    background: #2a2a2a;
+  }
+  
+  .attendee-item {
+    background: #2a2a2a;
+  }
+  
+  .attendee-name p {
+    color: #e5e5e5;
+  }
+  
+  .attendee-title p {
+    color: #a3a3a3;
+  }
+}
+
+/* 悬停效果 */
+.attendee-item:hover {
+  background: #f8f9fa;
+  transition: background-color 0.2s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  .attendee-item:hover {
+    background: #3a3a3a;
+  }
+}
