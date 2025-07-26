@@ -12,6 +12,7 @@ import PeopleIcon from '../../assets/icons/people.svg?react';
 import LinkIcon from '../../assets/icons/link.svg?react';
 import NoteIcon from '../../assets/icons/note.svg?react';
 import RecordIcon from '../../assets/icons/record.svg?react';
+import PlaceFlagIcon from '../../assets/icons/placeFlag.svg?react';
 
 // 图标映射表类型
 export type IconName = 
@@ -25,7 +26,8 @@ export type IconName =
   | 'people'
   | 'link'
   | 'note'
-  | 'record';
+  | 'record'
+  | 'placeFlag';
 
 // 图标映射表
 export const iconMap: Record<IconName, React.ComponentType> = {
@@ -40,6 +42,7 @@ export const iconMap: Record<IconName, React.ComponentType> = {
   'link': LinkIcon,
   'note': NoteIcon,
   'record': RecordIcon,
+  'placeFlag': PlaceFlagIcon,
 };
 
 // 获取图标组件的函数

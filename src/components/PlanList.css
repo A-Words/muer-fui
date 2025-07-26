@@ -94,6 +94,7 @@
 
 .plan-list__event-card {
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* 底部输入区域 */
