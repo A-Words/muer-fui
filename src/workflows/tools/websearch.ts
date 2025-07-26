@@ -1,24 +1,7 @@
 import ky from 'ky'
 import { generateText } from 'ai'
 import { openrouter } from '../provider'
-
-export const SUMMARIZER_SYSTEM_PROMPT = `
-你是一个专业的网页内容总结助手。你的任务是阅读提供的网页内容，并生成一份准确、简洁且富有结构的中文摘要。
-
-要求：
-1. 摘要应该保持客观中立，准确反映原文信息
-2. 重点突出与用户查询相关的关键信息
-3. 保持逻辑清晰，分段合理
-4. 长度适中，既要全面又要简洁
-5. 如果内容包含时间、价格、地址等具体信息，请准确保留
-6. 如果网页包含图片，请描述图片的相关信息
-
-格式要求：
-- 使用清晰的段落结构
-- 重要信息可以使用**粗体**标记
-- 如果有列表信息，使用合适的列表格式
-- 保持语言流畅自然
-`
+import { PROMPT_ROLE_SUMMARIZER } from '../prompts'
 
 export type SearchResult = {
   title: string
@@ -115,7 +98,7 @@ async function requestSummarize(content: string) {
   console.log('[websearch tool] Sending content to summarization model')
   const { text, usage } = await generateText({
     model: openrouter('google/gemini-2.5-flash-lite'),
-    system: SUMMARIZER_SYSTEM_PROMPT,
+    system: PROMPT_ROLE_SUMMARIZER,
     messages: [
       {
         role: 'user',
@@ -143,6 +126,8 @@ async function requestSummarize(content: string) {
 async function requestResolve(url: string) {
   console.log(`Requesting full content from Jina for URL: ${url}`)
   const response = await ky.post('https://r.jina.ai/', {
+    retry: 5,
+    timeout: 60000,
     headers: {
       'Authorization': 'Bearer ' + import.meta.env.VITE_JINA_API_KEY,
       'Content-Type': 'application/json',
@@ -167,12 +152,18 @@ async function requestResolve(url: string) {
 
 async function requestSearch(query: string) {
   console.log(`Requesting search from Jina for query: "${query}"`)
-  const response = await ky.get('https://s.jina.ai/?q=' + encodeURIComponent(query), {
+  const response = await ky.post('https://s.jina.ai/', {
+    retry: 5,
+    timeout: 60000,
     headers: {
+      'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer ' + import.meta.env.VITE_JINA_API_KEY,
       'X-Respond-With': 'no-content',
       'X-With-Favicons': 'true',
+    },
+    json: {
+      q: query,
     },
   })
 
