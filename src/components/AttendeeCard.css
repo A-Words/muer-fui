@@ -36,7 +36,7 @@
   flex-shrink: 0;
 }
 
-.icon {
+.attendee-card .icon {
   position: absolute;
   display: block;
   max-width: none;

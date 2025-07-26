@@ -1,0 +1,247 @@
+/* ThinkingCard.css - 智能思考卡片组件样式 */
+
+.thinking-card {
+    background: rgba(245, 245, 245, 0.9);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border-radius: var(--border-radius-border-radius-large, 16px);
+    border: 1px solid var(--border-border-normal-light, #E1E1E1);
+}
+
+/* 快速预览状态层 */
+.thinking-card-header {
+    padding: 6px 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: rgba(240, 240, 240, 1);
+    border-bottom: 0px solid rgba(0, 0, 0, 0.1);
+}
+
+.thinking-card-header:hover {
+    background-color: rgba(235, 235, 235, 1);
+}
+
+.thinking-card-header.expanded {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(230, 230, 230, 1);
+}
+
+.status-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+.status-icon {
+    color: #007AFF;
+}
+
+.main-step {
+    display: flex;
+    padding: 0 var(--padding-padding-tiny, 4px);
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    border-radius: var(--border-radius-border-radius-middle, 8px);
+    background: #FFF;
+}
+
+.step-icon {
+    color: #666;
+}
+
+/* 展开的思考阶段层 */
+.thinking-card-body {
+    padding: 0 8px;
+    background-color: #FFFFFF;
+    gap: 8px;
+    display: flex;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease-out, opacity 0.2s ease-out, padding 0.3s ease-out;
+}
+
+.thinking-card-body.expanded {
+    max-height: 500px; /* 足够大的值来容纳内容 */
+    opacity: 1;
+    padding: 6px 8px;
+}
+
+.thinking-step {
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transition-delay: 0.1s;
+}
+
+.thinking-card-body.expanded .thinking-step {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.thinking-card-body.expanded .thinking-step:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.thinking-card-body.expanded .thinking-step:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.thinking-step:last-child {
+    border-bottom: none;
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.step-title {
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.step-description {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.step-loading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.loading-icon {
+    color: #007AFF;
+}
+
+.loading-text {
+    color: #999;
+    font-size: 12px;
+}
+
+.step-tags {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    align-items: stretch
+}
+
+.step-tag {
+    height: auto;
+    font-size: 14px;
+    display: flex;
+    padding: var(--padding-padding-small, 6px) var(--padding-padding-default, 10px);
+    align-items: center;
+    gap: var(--gap-gap-inside-space, 4px);
+    border-radius: var(--border-radius-border-radius-allround, 99px);
+    border: 1px solid var(--control-normal-lightBackground-whiteOnly, #FFF);
+    background: var(--control-normal-lightBackground-white, #F0F0F0);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, background-color 0.2s ease;
+}
+
+.thinking-card-body.expanded .step-tag {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.thinking-card-body.expanded .step-tag:nth-child(1) {
+    transition-delay: 0.3s;
+}
+
+.thinking-card-body.expanded .step-tag:nth-child(2) {
+    transition-delay: 0.35s;
+}
+
+.thinking-card-body.expanded .step-tag:nth-child(3) {
+    transition-delay: 0.4s;
+}
+
+.step-tag:hover {
+    background: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.tag-icon {
+    color: #007AFF;
+}
+
+.tag-title {
+    white-space: nowrap;
+    display: none;
+}
+
+.step-tag:first-child .tag-title {
+    display: block;
+}
+
+.step-text{
+    color: #5A5A5A;
+
+/* Typography-Text */
+font-family: "OPPO Sans 4.0";
+font-size: var(--size-size-regular, 14px);
+font-style: normal;
+font-weight: var(--font-weight-regular, 400);
+line-height: var(--line-height-line-height-regular, 18px); /* 128.571% */
+}
+
+/* 加载动画 */
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rotating {
+    animation: rotating 1s linear infinite;
+}
+
+/* 响应式设计 */
+/* @media (max-width: 768px) {
+  .thinking-card {
+    border-radius: 12px;
+  }
+  
+  .thinking-card-header {
+    padding: 14px;
+  }
+  
+  .thinking-card-body {
+    padding: 0 14px 14px;
+  }
+  
+  .step-tags {
+    flex-wrap: wrap;
+  }
+  
+  .step-tag {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+} */

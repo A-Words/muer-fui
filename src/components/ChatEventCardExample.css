@@ -1,0 +1,47 @@
+/* ChatEventCard 示例页面样式 */
+.chat-event-card-example {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.chat-event-card-example__title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.chat-event-card-example__section {
+  margin-bottom: 30px;
+}
+
+.chat-event-card-example__section h3 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.chat-event-card-example__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 15px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .chat-event-card-example {
+    padding: 15px;
+  }
+  
+  .chat-event-card-example__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

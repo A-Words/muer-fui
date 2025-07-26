@@ -24,6 +24,11 @@
   border-radius: 8px;
   padding: 2px;
   box-sizing: border-box;
+  cursor: pointer;
+  user-select: none; /* 防止长按时选中文本 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 /* 用户消息气泡样式 */
@@ -34,7 +39,7 @@
 
 /* AI消息气泡样式 */
 .chat-bubble.ai {
-  background-color: #f5f5f5;
+  background-color: transparent;
   border-radius: 8px;
 }
 
@@ -42,6 +47,12 @@
   padding: 8px 10px;
   border-radius: 6px;
   position: relative;
+}
+
+/* AI消息内容区域 - 无背景 */
+.chat-bubble.ai .chat-bubble-content {
+  padding: 8px 0;
+  background: transparent;
 }
 
 .chat-bubble-text {
@@ -60,7 +71,33 @@
   color: #999999;
   margin-top: 4px;
   text-align: right;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease, margin-top 0.3s ease;
+  transform: translateY(-5px);
+}
+
+.chat-bubble-timestamp.visible {
   opacity: 0.7;
+  max-height: 20px;
+  transform: translateY(0);
+}
+
+/* 长按时气泡的视觉反馈 */
+.chat-bubble.show-timestamp {
+  transform: scale(1.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* 用户消息长按时的阴影效果 */
+.chat-bubble.user.show-timestamp {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* AI消息长按时的轻微阴影效果 */
+.chat-bubble.ai.show-timestamp {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 响应式设计 */
@@ -91,12 +128,14 @@
   }
 }
 
-/* Hover 效果 */
-.chat-bubble:hover {
-  transform: scale(1.02);
-  transition: transform 0.2s ease;
-}
+/* Hover 效果 - 仅在非触摸设备上生效 */
+@media (hover: hover) {
+  .chat-bubble:hover:not(.show-timestamp) {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+  }
 
-.chat-bubble:not(:hover) {
-  transition: transform 0.2s ease;
+  .chat-bubble:not(:hover):not(.show-timestamp) {
+    transition: transform 0.2s ease;
+  }
 }

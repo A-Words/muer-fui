@@ -1,0 +1,143 @@
+/* ChatCard 组件样式 */
+
+.chat-card-container {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.chat-card {
+  width: 100%;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  padding: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.chat-card:hover:not(.disabled) {
+  background-color: #e8e8e8;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chat-card:active:not(.disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chat-card.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.chat-card-content {
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.chat-card-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.chat-card-title {
+  width: 100%;
+}
+
+.chat-card-title p {
+  font-family: 'OPPO Sans 4.0', -webkit-system-font, 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #5a5a5a;
+  margin: 0;
+  word-wrap: break-word;
+  word-break: break-word;
+  text-align: left;
+}
+
+.chat-card-subtitle {
+  width: 100%;
+}
+
+.chat-card-subtitle p {
+  font-family: 'OPPO Sans 4.0', -webkit-system-font, 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #787878;
+  margin: 0;
+  word-wrap: break-word;
+  word-break: break-word;
+  text-align: left;
+}
+
+.chat-card-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+}
+
+.arrow-icon {
+  transition: transform 0.2s ease;
+  color: #999999;
+}
+
+.chat-card:hover:not(.disabled) .arrow-icon {
+  transform: translateX(2px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .chat-card-content {
+    padding: 10px 12px;
+  }
+  
+  .chat-card-title p {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  
+  .chat-card-subtitle p {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+/* 动画效果 */
+.chat-card {
+  animation: cardSlideIn 0.3s ease-out;
+}
+
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 无障碍访问 */
+.chat-card:focus-visible {
+  outline: 2px solid #007AFF;
+  outline-offset: 2px;
+}

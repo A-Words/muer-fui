@@ -42,10 +42,13 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 20px 16px 80px; /* 底部留出输入框空间 */
-  overflow-y: auto;
-  min-height: 0;
+  padding: 16px 12px 80px;
+  overflow-x: auto;
+  box-sizing: border-box;
+  margin-bottom: 140px;
 }
+
+
 
 /* 大标题区域 */
 .chat-page-title {
@@ -79,15 +82,15 @@
 
 /* 聊天消息区域 */
 .chat-messages {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 200px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease-out 0.3s, transform 0.7s ease-out 0.3s;
-  overflow-y: auto;
-  padding-bottom: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease-out 0.3s, transform 0.7s ease-out 0.3s;
+    overflow-y: visible;
+    padding-bottom: 20px;
 }
 
 /* 当有消息时，取消居中对齐 */
@@ -121,6 +124,100 @@
   margin-bottom: 0;
 }
 
+/* 聊天卡片包装器 */
+.chat-card-wrapper {
+  width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+/* 用户的卡片（如果需要） */
+.chat-card-wrapper.user {
+  justify-content: flex-end;
+}
+
+/* AI的卡片 */
+.chat-card-wrapper.ai {
+  justify-content: flex-start;
+}
+
+.chat-card-wrapper .chat-card-container {
+  max-width: 280px;
+  margin-bottom: 0;
+}
+
+/* 智能思考卡片包装器 */
+.thinking-card-wrapper {
+  width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+/* 用户的思考卡片（如果需要） */
+.thinking-card-wrapper.user {
+  justify-content: flex-end;
+}
+
+/* AI的思考卡片 */
+.thinking-card-wrapper.ai {
+  justify-content: flex-start;
+}
+
+.thinking-card-wrapper .thinking-card {
+  max-width: 320px;
+  margin-bottom: 0;
+}
+
+/* 聊天事件卡片包装器 */
+.chat-event-card-wrapper {
+  width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+/* 用户的事件卡片（如果需要） */
+.chat-event-card-wrapper.user {
+  justify-content: flex-end;
+}
+
+/* AI的事件卡片 */
+.chat-event-card-wrapper.ai {
+  justify-content: flex-start;
+}
+
+.chat-event-card-wrapper .chat-event-card {
+  max-width: none !important;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+/* 消息组样式 */
+.message-group {
+  margin-bottom: 16px;
+}
+
+.message-group.user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.message-group.ai {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 消息组内的间距 */
+.message-group > div {
+  margin-bottom: 8px;
+}
+
+.message-group > div:last-child {
+  margin-bottom: 0;
+  width: 100%;
+}
+
 /* 输入区域 */
 .chat-page-input {
   position: fixed;
@@ -150,9 +247,6 @@
 
 /* 响应式设计 */
 @media (max-width: 480px) {
-  .chat-page-content {
-    padding: 16px 12px 80px;
-  }
   
   .chat-page-title {
     padding-top: 24px;

@@ -53,3 +53,15 @@ export type { EventLocationProps } from './EventLocation';
 // 聊天气泡组件
 export { default as ChatBubble } from './ChatBubble';
 export type { ChatBubbleProps } from './ChatBubble';
+
+// 聊天卡片组件
+export { default as ChatCard } from './ChatCard';
+export type { ChatCardProps } from './ChatCard';
+
+// 智能思考卡片组件
+export { default as ThinkingCard } from './ThinkingCard';
+export type { ThinkingCardProps, ThinkingStep } from './ThinkingCard';
+
+// 聊天事件卡片组件
+export { default as ChatEventCard } from './ChatEventCard';
+export type { ChatEventCardProps } from './ChatEventCard';
