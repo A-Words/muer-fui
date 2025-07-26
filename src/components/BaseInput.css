@@ -57,6 +57,16 @@
   outline: none;
 }
 
+/* 只读状态的输入框样式 */
+.input-field[readonly] {
+  cursor: pointer;
+  user-select: none;
+}
+
+.input-field[readonly]:focus {
+  outline: none;
+}
+
 .icon-group {
   display: flex;
   align-items: center;

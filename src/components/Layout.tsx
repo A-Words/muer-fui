@@ -11,11 +11,37 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('home');
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+
+  // 简化的键盘检测 - 只监听输入框焦点
+  useEffect(() => {
+    const handleFocusIn = (e: FocusEvent) => {
+      const target = e.target as HTMLElement;
+      if (target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA') {
+        setIsKeyboardVisible(true);
+      }
+    };
+
+    const handleFocusOut = (e: FocusEvent) => {
+      const target = e.target as HTMLElement;
+      if (target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA') {
+        setIsKeyboardVisible(false);
+      }
+    };
+
+    document.addEventListener('focusin', handleFocusIn);
+    document.addEventListener('focusout', handleFocusOut);
+
+    return () => {
+      document.removeEventListener('focusin', handleFocusIn);
+      document.removeEventListener('focusout', handleFocusOut);
+    };
+  }, []);
 
   // 根据当前路径设置活跃Tab
   useEffect(() => {
     const path = location.pathname;
-    if (path === '/' || path === '/home') {
+    if (path === '/' || path === '/home' || path === '/chat') {
       setActiveTab('home');
     } else if (path === '/planning') {
       setActiveTab('planning');
@@ -64,20 +90,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="app-layout">
+    <div className={`app-layout ${isKeyboardVisible ? 'keyboard-visible' : ''}`}>
       {/* 主要内容区域 */}
       <main className="main-content">
         {children}
       </main>
 
-      {/* 底部Tab栏 */}
-      <footer className="bottom-navigation">
-        <BottomTabBar
-          tabs={tabs}
-          activeTabId={activeTab}
-          onTabChange={handleTabChange}
-        />
-      </footer>
+      {/* 底部Tab栏 - 键盘弹起时隐藏 */}
+      {!isKeyboardVisible && (
+        <footer className="bottom-navigation">
+          <BottomTabBar
+            tabs={tabs}
+            activeTabId={activeTab}
+            onTabChange={handleTabChange}
+          />
+        </footer>
+      )}
     </div>
   );
 };

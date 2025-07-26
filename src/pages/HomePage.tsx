@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppBar, BaseInput, MeetingInfo, PreMeetingNotes, MeetingRecorder, AttendeeCard, RelatedLinks } from '../components';
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const navigate = useNavigate();
+  
+  const handleInputClick = () => {
+    // 开始过渡动画
+    setIsTransitioning(true);
+    
+    // 延迟跳转，等待动画完成
+    setTimeout(() => {
+      navigate('/chat');
+    }, 300); // 300ms的过渡时间
+  };
   
   const handleMicrophoneClick = () => {
     console.log('麦克风点击');
+    // 同样的过渡效果
+    setIsTransitioning(true);
+    setTimeout(() => {
+      navigate('/chat');
+    }, 300);
   };
   
   const handleAttachClick = () => {
     console.log('附件点击');
-  };
-  
-  const handleTabChange = (tabId: string) => {
-    console.log('Tab changed to:', tabId);
+    // 同样的过渡效果
+    setIsTransitioning(true);
+    setTimeout(() => {
+      navigate('/chat');
+    }, 300);
   };
   
   const handleStartRecording = () => {
@@ -26,7 +44,7 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="home-page">
+    <div className={`home-page ${isTransitioning ? 'transitioning' : ''}`}>
       <AppBar 
         title="Muer AI" 
         onMenuClick={() => console.log('菜单点击')}
@@ -37,10 +55,10 @@ const HomePage: React.FC = () => {
         <div className="input-section">
           <BaseInput
             placeholder="和 Muer AI 说说看你的会议问题？"
-            value={inputValue}
-            onChange={setInputValue}
+            onClick={handleInputClick}
             onMicrophoneClick={handleMicrophoneClick}
             onAttachClick={handleAttachClick}
+            readOnly={true}
           />
         </div>
         

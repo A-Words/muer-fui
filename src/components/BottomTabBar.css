@@ -102,10 +102,15 @@
   flex-shrink: 0;
   /* 移除移动端的tap highlight效果 */
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.25s cubic-bezier(0.19, 0.66, 0.1, 0.99);
 }
 
-.tab-item.active .icon-state-layer:active {
+.tab-item:active .icon-state-layer {
+  transform: scale(0.95);
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.tab-item.active:active .icon-state-layer {
   width: 72px;
 }
 
@@ -189,7 +194,7 @@
 
 /* 活跃状态动画 */
 .tab-item.active .icon-container {
-  animation: tabActivate 0.3s ease-out;
+  animation: tabActivate 0.3s;
 }
 
 @keyframes tabActivate {

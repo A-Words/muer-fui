@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import PlanningPage from './pages/PlanningPage';
 import ProfilePage from './pages/ProfilePage';
+import ChatPage from './pages/ChatPage';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/planning" element={<PlanningPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/chat" element={<ChatPage />} />
         </Routes>
       </Layout>
     </Router>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './BaseInput.css';
 
 // 图片资源常量
@@ -11,19 +11,40 @@ export interface BaseInputProps {
   onChange?: (value: string) => void;
   onMicrophoneClick?: () => void;
   onAttachClick?: () => void;
+  onClick?: () => void;
+  readOnly?: boolean;
   className?: string;
 }
 
-const BaseInput: React.FC<BaseInputProps> = ({
+const BaseInput = forwardRef<HTMLInputElement, BaseInputProps>(({
   placeholder = "和 Muer AI 说说看你的规划问题？",
   value = "",
   onChange,
   onMicrophoneClick,
   onAttachClick,
+  onClick,
+  readOnly = false,
   className = ""
-}) => {
+}, ref) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value);
+    if (!readOnly) {
+      onChange?.(e.target.value);
+    }
+  };
+
+  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (readOnly) {
+      e.target.blur(); // 如果是只读模式，立即失焦
+    }
+  };
+
+  const handleInputClick = (e: React.MouseEvent<HTMLInputElement>) => {
+    if (readOnly) {
+      e.preventDefault();
+      onClick?.();
+    } else {
+      onClick?.();
+    }
   };
 
   return (
@@ -32,11 +53,15 @@ const BaseInput: React.FC<BaseInputProps> = ({
         <div className="input-area">
           <div className="input-wrapper">
             <input
+              ref={ref}
               type="text"
               value={value}
               onChange={handleInputChange}
+              onClick={handleInputClick}
+              onFocus={handleInputFocus}
               placeholder={placeholder}
               className="input-field"
+              readOnly={readOnly}
             />
           </div>
         </div>
@@ -68,6 +93,6 @@ const BaseInput: React.FC<BaseInputProps> = ({
       <div className="input-border" />
     </div>
   );
-};
+});
 
 export default BaseInput;

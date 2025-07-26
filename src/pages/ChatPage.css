@@ -1,0 +1,168 @@
+/* ChatPage 样式 */
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  /* 防止键盘影响布局 */
+  touch-action: manipulation;
+}
+
+/* 页面加载完成后的状态 */
+.chat-page.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 头部AppBar区域 */
+.chat-page-header {
+  flex-shrink: 0;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: opacity 0.5s ease-out 0.1s, transform 0.5s ease-out 0.1s;
+}
+
+.chat-page.loaded .chat-page-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 主要内容区域 */
+.chat-page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px 80px; /* 底部留出输入框空间 */
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* 大标题区域 */
+.chat-page-title {
+  text-align: center;
+  margin-bottom: 32px;
+  padding-top: 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s;
+}
+
+.chat-page.loaded .chat-page-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chat-page-title h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.chat-page-subtitle {
+  font-size: 16px;
+  color: #666666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 聊天消息区域 */
+.chat-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 200px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-out 0.3s, transform 0.7s ease-out 0.3s;
+}
+
+.chat-page.loaded .chat-messages {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.welcome-message p {
+  font-size: 16px;
+  color: #666666;
+  line-height: 1.6;
+  margin: 0 0 8px 0;
+}
+
+.welcome-message p:last-child {
+  margin-bottom: 0;
+}
+
+/* 输入区域 */
+.chat-page-input {
+  position: fixed;
+  bottom: 188px; /* BottomTabBar高度 */
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background-color: #ffffff;
+  border-top: 1px solid #f0f0f0;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s, bottom 0.3s ease;
+}
+
+/* 当BottomTabBar隐藏时，输入框移到底部 */
+.app-layout.keyboard-visible .chat-page-input {
+  bottom: 88px;
+}
+
+.chat-page.loaded .chat-page-input {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .chat-page-content {
+    padding: 16px 12px 80px;
+  }
+  
+  .chat-page-title {
+    padding-top: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .chat-page-title h1 {
+    font-size: 24px;
+  }
+  
+  .chat-page-subtitle {
+    font-size: 14px;
+  }
+/*   
+  .chat-page-input {
+    padding: 12px;
+  } */
+}
+
+/* 适配iPhone安全区域 */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .chat-page-input {
+    bottom: calc(88px + env(safe-area-inset-bottom));
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}
