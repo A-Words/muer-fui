@@ -70,8 +70,6 @@
 
 .icon-wrapper {
   position: relative;
-  width: 24px;
-  height: 24px;
   overflow: hidden;
   flex-shrink: 0;
 }

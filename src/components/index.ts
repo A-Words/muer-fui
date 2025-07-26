@@ -18,6 +18,10 @@ export type { RelatedLinksProps, LinkInfo } from './RelatedLinks';
 export { AppBar } from './AppBar';
 export type { AppBarProps } from './AppBar';
 
+// 图标组件
+export { Icon } from './Icon';
+export type { IconProps } from './Icon/Icon';
+
 // 底部Tab栏组件
 export { default as BottomTabBar } from './BottomTabBar';
 export type { BottomTabBarProps, TabItem } from './BottomTabBar';
