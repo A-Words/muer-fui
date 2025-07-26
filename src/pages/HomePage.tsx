@@ -1,5 +1,6 @@
 import React from 'react';
 import AppBar from '../components/AppBar/AppBar';
+import { MeetingInfo } from '../components';
 import './HomePage.css';
 
 const HomePage: React.FC = () => {
@@ -11,7 +12,11 @@ const HomePage: React.FC = () => {
         onAvatarClick={() => console.log('头像点击')}
       />
       <div className="home-page-content">
-        {/* 木耳主页内容 */}
+        <MeetingInfo
+          time="7月30日 21:00 - 次日 01:00"
+          status="进行中"
+          title="国际制品展会参展讨论"
+        />
       </div>
     </div>
   );

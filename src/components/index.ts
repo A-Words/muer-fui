@@ -18,6 +18,10 @@ export type { RelatedLinksProps, LinkInfo } from './RelatedLinks';
 export { AppBar } from './AppBar';
 export type { AppBarProps } from './AppBar';
 
+// 会议信息组件
+export { default as MeetingInfo } from './MeetingInfo';
+export type { MeetingInfoProps } from './MeetingInfo';
+
 // 图标组件
 export { Icon } from './Icon';
 export type { IconProps } from './Icon/Icon';
