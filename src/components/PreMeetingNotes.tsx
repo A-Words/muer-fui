@@ -1,9 +1,6 @@
 import React from 'react';
 import './PreMeetingNotes.css';
 
-// 图片资源常量 - 实际项目中这些应该替换为本地资源或CDN链接
-const iconImg = "http://localhost:3845/assets/22353f7d3eec43b18757eab4b9750a1544defef8.svg";
-
 export interface PreMeetingNotesProps {
   title?: string;
   noteItems?: string[];
@@ -20,14 +17,10 @@ const PreMeetingNotes: React.FC<PreMeetingNotesProps> = ({
   className = ""
 }) => {
   return (
-    <div className={`pre-meeting-notes ${className}`}>
+    <div className={`pre-meeting-notes ${className}`} style={{ height: '129px' }}>
       {/* 标题区域 */}
       <div className="title-section">
-        <div className="icon-container">
-          <div className="icon-wrapper">
-            <img src={iconImg} alt="笔记图标" className="icon" />
-          </div>
-        </div>
+        {/* Image removed from here */}
         <div className="title-text">
           <p>{title}</p>
         </div>
@@ -44,8 +37,7 @@ const PreMeetingNotes: React.FC<PreMeetingNotesProps> = ({
         </ol>
       </div>
 
-      {/* 背景图片区域 */}
-      <div className="background-image-section" />
+      {/* Background image section removed */}
     </div>
   );
 };

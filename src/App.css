@@ -1,15 +1,12 @@
-/* 移动端应用样式 */
+/* App.css */
+
+/* General body and root styles */
 #root {
   margin: 0 auto;
   min-height: 100vh;
   background-color: #ffffff;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Hide horizontal scrollbars globally */
   width: 100%;
-}
-
-/* 全局样式重置 */
-* {
-  box-sizing: border-box;
 }
 
 body {
@@ -23,8 +20,68 @@ body {
   background-color: #ffffff;
 }
 
+/* Layout styles */
+.Layout {
+  position: relative; /* Needed for absolute positioning of children */
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Clip content that exceeds the layout boundaries */
+}
 
+/* Transition group and CSSTransition styles */
+.transition-group {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Ensure it takes the full height of the Layout */
+}
 
+/* CSSTransition classes for fade and slide effect */
+.page-transition-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0); /* Start off-screen to the right */
+  overflow: hidden; /* Prevent content spill during enter */
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0); /* Move to center */
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translate3d(0, 0, 0); /* Starting position for exit */
+  position: absolute; /* Important for exit transition to not take up space */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0); /* Move off-screen to the left */
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+/* Ensure the Route content itself is positioned correctly */
+/* We need to target the element that CSSTransition is applied to inside Routes */
+/* This structure in App.tsx means CSSTransition wraps Routes directly.
+   So the Pages inside Routes need to be positioned */
+.page-transition-enter-done,       /* For when entering is complete */
+.page-transition-enter-active,     /* While entering */
+.page-transition-exit-active,      /* While exiting */
+.page-transition-exit              /* Before exiting */
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Allow internal scrolling for pages */
+}
+
+/* Specific styles for other components (if they affect layout) */
 .pre-meeting-notes-container {
   max-width: 300px;
   margin: 2rem auto;
@@ -45,7 +102,6 @@ body {
   margin: 2rem auto;
 }
 
-/* BaseInput 组件样式 */
 .input-section {
   max-width: 500px;
   margin: 2rem auto;
