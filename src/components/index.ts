@@ -18,6 +18,18 @@ export type { RelatedLinksProps, LinkInfo } from './RelatedLinks';
 export { AppBar } from './AppBar';
 export type { AppBarProps } from './AppBar';
 
+// 会议信息组件
+export { default as MeetingInfo } from './MeetingInfo';
+export type { MeetingInfoProps } from './MeetingInfo';
+
+// 图标组件
+export { Icon } from './Icon';
+export type { IconProps } from './Icon/Icon';
+
+// 底部Tab栏组件
+export { default as BottomTabBar } from './BottomTabBar';
+export type { BottomTabBarProps, TabItem } from './BottomTabBar';
+
 // 基础输入框组件
 export { default as BaseInput } from './BaseInput';
 export type { BaseInputProps } from './BaseInput';
