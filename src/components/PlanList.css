@@ -36,6 +36,11 @@
   width: 100%;
 }
 
+/* 当没有 AppBar 时的主要内容区域 */
+.plan-list__main-content--no-app-bar {
+  padding: 0;
+}
+
 /* 顶部提示区域 */
 .plan-list__header {
   display: flex;

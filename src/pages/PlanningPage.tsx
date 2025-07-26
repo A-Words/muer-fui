@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlanList, EventStatus, TaskStatus } from '../components';
+import { PlanList, EventStatus, TaskStatus, AppBar } from '../components';
 import type { EventData } from '../components';
 import './PlanningPage.css';
 
@@ -104,12 +104,20 @@ const PlanningPage: React.FC = () => {
 
   return (
     <div className="planning-page">
-      <PlanList
-        headerText="有事件正在进行，\\n请到「木耳」查看。\\n7月30日 21:00 - 次日 01:00\\n国际制品展会参展讨论"
-        events={events}
-        inputPlaceholder="和 Muer AI 说说看你的规划问题？"
-        callbacks={callbacks}
+      <AppBar 
+        title="规划" 
+        onMenuClick={callbacks.onMenuClick}
+        onAvatarClick={callbacks.onAvatarClick}
       />
+      <div className="planning-page-content">
+        <PlanList
+          headerText="有事件正在进行，\n请到「木耳」查看。\n7月30日 21:00 - 次日 01:00\n国际制品展会参展讨论"
+          events={events}
+          inputPlaceholder="和 Muer AI 说说看你的规划问题？"
+          callbacks={callbacks}
+          hideAppBar={true}
+        />
+      </div>
     </div>
   );
 };

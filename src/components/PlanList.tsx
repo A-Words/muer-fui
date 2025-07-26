@@ -39,6 +39,8 @@ export interface PlanListProps {
   events?: EventData[];
   /** 输入框占位符 */
   inputPlaceholder?: string;
+  /** 是否隐藏应用栏 */
+  hideAppBar?: boolean;
   /** 各种图标URLs */
   icons?: {
     menuIcon?: string;
@@ -72,6 +74,7 @@ const PlanList: React.FC<PlanListProps> = ({
   headerText = "有事件正在进行，\\n请到「木耳」查看。\\n7月30日 21:00 - 次日 01:00\\n国际制品展会参展讨论",
   events = [],
   inputPlaceholder = "和 Muer AI 说说看你的规划问题？",
+  hideAppBar = false,
   icons = {},
   callbacks = {},
   className = ''
@@ -106,16 +109,18 @@ const PlanList: React.FC<PlanListProps> = ({
   return (
     <div className={`plan-list ${className}`}>
       {/* 应用栏 */}
-      <div className="plan-list__app-bar">
-        <AppBar 
-          title="规划" 
-          onMenuClick={callbacks.onMenuClick}
-          onAvatarClick={callbacks.onAvatarClick}
-        />
-      </div>
+      {!hideAppBar && (
+        <div className="plan-list__app-bar">
+          <AppBar 
+            title="规划" 
+            onMenuClick={callbacks.onMenuClick}
+            onAvatarClick={callbacks.onAvatarClick}
+          />
+        </div>
+      )}
 
       {/* 主要内容区域 */}
-      <div className="plan-list__main-content">
+      <div className={`plan-list__main-content ${hideAppBar ? 'plan-list__main-content--no-app-bar' : ''}`}>
         {/* 顶部提示区域 */}
         {headerText && (
           <div className="plan-list__header">
