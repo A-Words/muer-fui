@@ -61,7 +61,7 @@ const ChatPage: React.FC = () => {
   const modelK2 = siliconflow('moonshotai/Kimi-K2-Instruct');
 
   // 添加消息的辅助函数
-  const addMessage = useCallback((type: 'user' | 'ai', content: ContentItem[]) => {
+  const addMessage = useCallback((type: 'user' | 'ai', content: ContentItem[], forceScroll: boolean = false) => {
     const message: Message = {
       id: `${type}-${Date.now()}`,
       type,
@@ -69,6 +69,20 @@ const ChatPage: React.FC = () => {
       content
     };
     setMessages(prev => [...prev, message]);
+    
+    // 对于AI消息或用户指定强制滚动时，立即滚动到底部
+    if (type === 'ai' || forceScroll) {
+      setTimeout(() => {
+        if (chatContainerRef.current) {
+          const container = chatContainerRef.current;
+          container.scrollTo({
+            top: container.scrollHeight,
+            behavior: 'smooth'
+          });
+        }
+      }, 150);
+    }
+    
     return message;
   }, []);
 
@@ -174,7 +188,7 @@ const ChatPage: React.FC = () => {
       addMessage('user', [{
         type: 'text',
         data: { text: answer }
-      }]);
+      }], true); // 强制滚动到底部
 
       const newAnswers = [...collectedAnswers, answer];
       setCollectedAnswers(newAnswers);
@@ -216,15 +230,10 @@ const ChatPage: React.FC = () => {
   }, [collectedAnswers, currentQuestionIndex, pendingQuestions, addMessage]);
 
   const handleSubmit = useCallback(async () => {
-    console.log(isProcessing)
     // if (!inputValue.trim() || isProcessing) return;
-
-    console.log(waitingForAnswers)
-    console.log(pendingQuestions)
 
     // 如果正在等待用户回答问题，处理回答
     if (waitingForAnswers && pendingQuestions.length > 0) {
-      console.log('answer')
       handleQuestionAnswer(inputValue);
       return;
     }
@@ -233,7 +242,7 @@ const ChatPage: React.FC = () => {
     addMessage('user', [{
       type: 'text',
       data: { text: inputValue }
-    }]);
+    }], true); // 强制滚动到底部
 
     const query = inputValue;
     setInputValue('');
@@ -393,18 +402,54 @@ const ChatPage: React.FC = () => {
 
 
 
-  // 自动滚动到底部
-  const scrollToBottom = () => {
+  // 自动滚动到底部（平滑滚动）
+  const scrollToBottom = useCallback((smooth: boolean = false) => {
     if (chatContainerRef.current) {
-      const { scrollHeight, clientHeight } = chatContainerRef.current;
-      chatContainerRef.current.scrollTop = scrollHeight - clientHeight;
+      const container = chatContainerRef.current;
+      const scrollOptions: ScrollToOptions = {
+        top: container.scrollHeight,
+        behavior: smooth ? 'smooth' : 'auto'
+      };
+      container.scrollTo(scrollOptions);
     }
-  };
+  }, []);
+
+  // 检查用户是否在聊天底部附近
+  const isNearBottom = useCallback(() => {
+    if (!chatContainerRef.current) return true;
+    
+    const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
+    const threshold = 100; // 距离底部100px内认为是在底部
+    return scrollTop + clientHeight >= scrollHeight - threshold;
+  }, []);
 
   // 当消息更新时自动滚动到底部
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    // 延迟执行滚动，确保DOM更新完成
+    const timer = setTimeout(() => {
+      // 只有当用户在底部附近时才自动滚动
+      if (isNearBottom()) {
+        scrollToBottom(true); // 使用平滑滚动
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [messages, scrollToBottom, isNearBottom]);
+
+  // 监听用户滚动行为
+  const [userScrolledUp, setUserScrolledUp] = useState(false);
+  
+  useEffect(() => {
+    const container = chatContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      setUserScrolledUp(!isNearBottom());
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, [isNearBottom]);
 
   return (
     <div 
@@ -435,51 +480,67 @@ const ChatPage: React.FC = () => {
             </div>
           </>
         ) : (
-          <div className="chat-messages" ref={chatContainerRef}>
-            {messages.map((message) => (
-              <div key={message.id} className={`message-group ${message.type}`}>
-                {message.content.map((item, index) => (
-                  <div key={`${message.id}-${index}`}>
-                    {item.type === 'text' ? (
-                      <ChatBubble
-                        message={item.data.text || ''}
-                        type={message.type}
-                        timestamp={index === message.content.length - 1 ? message.timestamp : undefined}
-                      />
-                    ) : item.type === 'card' ? (
-                      <div className={`chat-card-wrapper ${message.type}`}>
-                        <ChatCard
-                          title={item.data.cardData?.title || ''}
-                          subtitle=""
-                          onClick={() => console.log('Card clicked:', item.data.cardData?.title)}
+          <div className="chat-messages-container">
+            <div className="chat-messages" ref={chatContainerRef}>
+              {messages.map((message) => (
+                <div key={message.id} className={`message-group ${message.type}`}>
+                  {message.content.map((item, index) => (
+                    <div key={`${message.id}-${index}`}>
+                      {item.type === 'text' ? (
+                        <ChatBubble
+                          message={item.data.text || ''}
+                          type={message.type}
+                          timestamp={index === message.content.length - 1 ? message.timestamp : undefined}
                         />
-                      </div>
-                    ) : item.type === 'event' ? (
-                      <div className={`chat-event-card-wrapper ${message.type}`}>
-                        <ChatEventCard
-                          title={item.data.eventData?.title || ''}
-                          time={item.data.eventData?.time || ''}
-                          location={item.data.eventData?.location}
-                          statusMessage={item.data.eventData?.statusMessage}
-                          locationIcon={item.data.eventData?.locationIcon}
-                          onClick={() => console.log('Event card clicked:', item.data.eventData?.title)}
-                        />
-                      </div>
-                    ) : item.type === 'thinking' ? (
-                      <div className={`thinking-card-wrapper ${message.type}`}>
-                        <ThinkingCard
-                          status={item.data.thinkingData?.status || 'thinking'}
-                          statusText={item.data.thinkingData?.statusText || '研究中'}
-                          mainStep={item.data.thinkingData?.mainStep || '智能思考'}
-                          steps={item.data.thinkingData?.steps || []}
-                          defaultExpanded={false}
-                        />
-                      </div>
-                    ) : null}
-                  </div>
-                ))}
+                      ) : item.type === 'card' ? (
+                        <div className={`chat-card-wrapper ${message.type}`}>
+                          <ChatCard
+                            title={item.data.cardData?.title || ''}
+                            subtitle=""
+                            onClick={() => console.log('Card clicked:', item.data.cardData?.title)}
+                          />
+                        </div>
+                      ) : item.type === 'event' ? (
+                        <div className={`chat-event-card-wrapper ${message.type}`}>
+                          <ChatEventCard
+                            title={item.data.eventData?.title || ''}
+                            time={item.data.eventData?.time || ''}
+                            location={item.data.eventData?.location}
+                            statusMessage={item.data.eventData?.statusMessage}
+                            locationIcon={item.data.eventData?.locationIcon}
+                            onClick={() => console.log('Event card clicked:', item.data.eventData?.title)}
+                          />
+                        </div>
+                      ) : item.type === 'thinking' ? (
+                        <div className={`thinking-card-wrapper ${message.type}`}>
+                          <ThinkingCard
+                            status={item.data.thinkingData?.status || 'thinking'}
+                            statusText={item.data.thinkingData?.statusText || '研究中'}
+                            mainStep={item.data.thinkingData?.mainStep || '智能思考'}
+                            steps={item.data.thinkingData?.steps || []}
+                            defaultExpanded={false}
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+            
+            {/* 滚动到底部按钮 */}
+            {userScrolledUp && (
+              <div className="scroll-to-bottom-button">
+                <button 
+                  onClick={() => scrollToBottom(true)}
+                  className="scroll-to-bottom-btn"
+                  aria-label="滚动到底部"
+                >
+                  <span>↓</span>
+                  <span>新消息</span>
+                </button>
               </div>
-            ))}
+            )}
           </div>
         )}
       </div>

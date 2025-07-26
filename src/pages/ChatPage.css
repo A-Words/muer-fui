@@ -48,6 +48,69 @@
   margin-bottom: 140px;
 }
 
+/* 聊天消息容器 */
+.chat-messages-container {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 滚动到底部按钮容器 */
+.scroll-to-bottom-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 50;
+  animation: slideInUp 0.3s ease-out;
+}
+
+.scroll-to-bottom-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.scroll-to-bottom-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-bottom-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.scroll-to-bottom-btn span:first-child {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* 按钮进入动画 */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 
 /* 大标题区域 */
