@@ -33,3 +33,19 @@ export type { BottomTabBarProps, TabItem } from './BottomTabBar';
 // 基础输入框组件
 export { default as BaseInput } from './BaseInput';
 export type { BaseInputProps } from './BaseInput';
+
+// 规划列表组件
+export { default as PlanList, EventStatus, TaskStatus } from './PlanList';
+export type { PlanListProps, EventData } from './PlanList';
+
+// 事件卡片组件
+export { default as EventCard } from './EventCard';
+export type { EventCardProps } from './EventCard';
+
+// 任务项组件
+export { default as TaskItem } from './TaskItem';
+export type { TaskItemProps } from './TaskItem';
+
+// 事件位置组件
+export { default as EventLocation } from './EventLocation';
+export type { EventLocationProps } from './EventLocation';

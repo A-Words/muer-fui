@@ -1,6 +1,6 @@
 import React from 'react';
 import './MeetingInfo.css';
-import { Icon } from './index';
+// import { Icon } from './index';
 
 export interface MeetingInfoProps {
   /** 会议时间 */

@@ -1,0 +1,134 @@
+/* 导航栏组件样式 */
+.navigation-bar {
+  background-color: var(--box-normal-Background-whiteOnly, #ffffff);
+  position: relative;
+  width: 412px;
+}
+
+.navigation-bar__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 0 var(--padding-page-space, 24px) 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.navigation-bar__item-wrapper {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.navigation-bar__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside, 2px);
+  flex: 1;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 0;
+  min-width: 0;
+  padding: var(--padding-small, 6px) 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.navigation-bar__icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 16px;
+}
+
+.navigation-bar__state-layer {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: var(--gap-content-space, 8px);
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-tiny, 4px) 0;
+  width: 56px;
+  position: relative;
+}
+
+.navigation-bar__icon {
+  overflow: hidden;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  order: 1;
+}
+
+.navigation-bar__icon--hidden {
+  position: absolute;
+  left: 50%;
+  opacity: 0;
+  order: 2;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.navigation-bar__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.navigation-bar__label {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-regular, 400);
+  font-size: var(--size-regular, 14px);
+  line-height: var(--line-height-regular, 18px);
+  color: var(--M3-sys-light-on-surface-variant, #49454f);
+  text-align: center;
+  min-width: 100%;
+  width: min-content;
+}
+
+/* 激活状态样式 */
+.navigation-bar__item--active .navigation-bar__icon-container {
+  background-color: var(--control-theme-lightBackground, #fbcebc);
+}
+
+.navigation-bar__item--active .navigation-bar__label {
+  color: var(--M3-sys-light-secondary, #625b71);
+}
+
+/* 边框线 */
+.navigation-bar__border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--border-normal-light, #e1e1e1);
+  pointer-events: none;
+}
+
+/* 底部手势条区域 */
+.navigation-bar__handle-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 412px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigation-bar__handle {
+  background-color: var(--M3-sys-light-on-surface, #1d1b20);
+  height: 4px;
+  border-radius: 12px;
+  width: 108px;
+}

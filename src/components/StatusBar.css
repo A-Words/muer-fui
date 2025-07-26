@@ -1,0 +1,63 @@
+/* 状态栏组件样式 */
+.status-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 52px;
+  padding: var(--padding-middle, 10px) var(--padding-page-space, 24px);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.status-bar__time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--M3-sys-light-on-surface, #1d1b20);
+  letter-spacing: 0.14px;
+  white-space: nowrap;
+  font-variation-settings: 'wdth' 100;
+}
+
+.status-bar__icons {
+  display: inline-grid;
+  grid-template-columns: max-content;
+  grid-template-rows: max-content;
+  place-items: start;
+  position: relative;
+}
+
+.status-bar__icon {
+  grid-area: 1 / 1;
+  width: 17px;
+  height: 17px;
+  position: relative;
+}
+
+.status-bar__icon:nth-child(1) {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.status-bar__icon:nth-child(2) {
+  margin-left: 34.783%;
+  margin-top: 0;
+}
+
+.status-bar__icon--battery {
+  width: 8px;
+  height: 15px;
+  margin-left: 38px;
+  margin-top: 1px;
+}
+
+.status-bar__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}

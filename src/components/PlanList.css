@@ -1,0 +1,119 @@
+/* 规划列表组件样式 */
+.plan-list {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--box-normal-Background-whiteOnly, #ffffff);
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 应用栏区域 */
+.plan-list__app-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
+  background: linear-gradient(180deg, var(--box-normal-Background-whiteOnly, #ffffff) 0%, rgba(255, 255, 255, 0) 100%);
+  padding: 62px var(--padding-tiny, 4px) var(--padding-default, 8px);
+  z-index: 9;
+}
+
+/* 主要内容区域 */
+.plan-list__main-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-chapter-space, 16px);
+  flex: 1;
+  min-height: 0;
+  justify-content: flex-start;
+  padding: 118px 0 0;
+  width: 100%;
+}
+
+/* 当没有 AppBar 时的主要内容区域 */
+.plan-list__main-content--no-app-bar {
+  padding: 0;
+}
+
+/* 顶部提示区域 */
+.plan-list__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside-space, 4px);
+  height: 147px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 var(--padding-chapter-space, 16px);
+  box-sizing: border-box;
+}
+
+.plan-list__header-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside, 2px);
+  color: var(--text-normal-title-black, #3c3c3c);
+  text-align: left;
+  width: 100%;
+}
+
+.plan-list__header-title {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-light, 300);
+  font-size: var(--size-large, 24px);
+  line-height: var(--line-height-large, 30px);
+  margin: 0;
+  min-width: 100%;
+  width: min-content;
+}
+
+.plan-list__header-subtitle {
+  font-family: var(--font-family, 'OPPO Sans 4.0');
+  font-weight: var(--font-weight-semibold, 600);
+  font-size: var(--size-large, 24px);
+  line-height: var(--line-height-semilarge, 26px);
+  margin: 0;
+  min-width: 100%;
+  width: min-content;
+}
+
+/* 事件列表区域 */
+.plan-list__event-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-page-space, 24px);
+  overflow: hidden;
+  padding: var(--padding-page-space, 24px) 0 120px;
+  width: 100%;
+}
+
+.plan-list__event-card {
+  width: 100%;
+}
+
+/* 底部输入区域 */
+.plan-list__input-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--box-normal-Background-whiteOnly, #ffffff) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-inside-space, 4px);
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-block-space, 12px) var(--padding-chapter-space, 16px) var(--padding-chapter-space, 16px);
+  z-index: 8;
+}
+
+.plan-list__input {
+  width: 100%;
+}

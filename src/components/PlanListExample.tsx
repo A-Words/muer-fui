@@ -1,11 +1,16 @@
 import React from 'react';
-import { PlanList, EventStatus, TaskStatus, AppBar } from '../components';
+import { PlanList, EventStatus, TaskStatus } from '../components';
 import type { EventData } from '../components';
-import './PlanningPage.css';
+import './PlanListExample.css';
 
-const PlanningPage: React.FC = () => {
+/**
+ * PlanList组件使用示例
+ * 演示如何使用解耦合的规划列表组件
+ */
+const PlanListExample: React.FC = () => {
+
   // 示例事件数据
-  const events: EventData[] = [
+  const sampleEvents: EventData[] = [
     {
       id: 'event-1',
       title: '在杭州参加聚会',
@@ -103,23 +108,15 @@ const PlanningPage: React.FC = () => {
   };
 
   return (
-    <div className="planning-page">
-      <AppBar 
-        title="规划" 
-        onMenuClick={callbacks.onMenuClick}
-        onAvatarClick={callbacks.onAvatarClick}
+    <div className="plan-list-example">
+      <PlanList
+        headerText="有事件正在进行，\\n请到「木耳」查看。\\n7月30日 21:00 - 次日 01:00\\n国际制品展会参展讨论"
+        events={sampleEvents}
+        inputPlaceholder="和 Muer AI 说说看你的规划问题？"
+        callbacks={callbacks}
       />
-      <div className="planning-page-content">
-        <PlanList
-          headerText="有事件正在进行，\n请到「木耳」查看。\n7月30日 21:00 - 次日 01:00\n国际制品展会参展讨论"
-          events={events}
-          inputPlaceholder="和 Muer AI 说说看你的规划问题？"
-          callbacks={callbacks}
-          hideAppBar={true}
-        />
-      </div>
     </div>
   );
 };
 
-export default PlanningPage;
+export default PlanListExample;
